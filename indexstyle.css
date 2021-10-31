@@ -1,0 +1,226 @@
+body{
+  background-color: #000000;
+  margin:0;
+}
+  
+
+h3{
+  color : white;
+  font-family: monospace;
+  float:left;
+  margin-right : 10px
+}
+
+.navbar {
+  width: 100%;
+  background-color: black;
+  overflow: auto;
+}
+
+
+.navbar a {
+  float: left;
+  font-family :Arial, Helvetica, sans-serif;
+  text-align: center;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #05A8AA;
+  color : black;  
+}
+
+.active {
+  background-color: #6D6A75;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+
+#hist{
+  margin : 0;
+  margin-right : 0;
+}
+
+#programming{
+  margin : 0;
+  margin-right : 0;
+}
+
+#robotics{
+  margin : 0;
+  margin-right : 0;
+}
+#design{
+  margin : 0;
+  margin-right : 0;
+}
+#lab3{
+  margin : 0;
+  margin-right : 0;
+}
+#event{
+  margin : 0;
+  margin-right : 0;
+}
+#joinus{
+  margin : 0;
+  margin-right : 0;
+}
+
+#copy{
+  color : white;
+}
+
+#logo{
+  max-width: 3%;  
+  float:left;
+  height: auto;  
+  margin:0;
+}
+
+
+#main{
+  width : 140%;
+  height:auto;
+  position : relative;
+}
+#programming{
+  max-height : 100%;
+}
+
+#histtext {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  height : 750px;
+  text-align : justify;
+  width : 750px;
+  color : white;
+  position : absolute;
+  left : 90px;
+}
+
+#histtext h4{
+  font-size: 40px;
+}
+#histtext h3{
+  font-size : 75px;
+}
+
+#roboticstext {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  height : 750px;
+  text-align : justify;
+  width : 750px;
+  color : greenyellow ;
+  position : absolute;
+  left   : 90px;
+}
+
+#roboticstext h4{
+  font-size: 40px;  
+}
+#roboticstext h3{
+  color : greenyellow;
+  font-size : 75px;
+}
+
+#programmingtext {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  height : 750px;
+  text-align : justify;
+  width : 750px;
+  color : orangered;
+  position : absolute;
+  right : 90px;
+}
+
+#programmingtext h4{
+  font-size: 40px;
+}
+#programmingtext h3{
+  font-size : 75px;
+  color : orangered;
+}
+
+#designtext {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  height : 750px;
+  text-align : justify;
+  width : 750px;
+  color : cyan;
+  position : absolute;
+  right : 90px;
+}
+
+#designtext h4{
+  font-size: 40px;
+}
+#designtext h3{
+  font-size : 75px;
+  color : cyan  ;
+}
+
+#videotext {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  height : 750px;
+  text-align : justify;
+  width : 750px;
+  color : lime;
+  position : absolute;
+  left : 90px;
+}
+
+#videotext h4{
+  font-size: 40px;
+}
+#videotext h3{
+  font-size : 75px;
+  color : lime  ;
+}
+
+#lab3text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  height : 750px;
+  text-align : justify;
+  width : 750px;
+  color : whitesmoke;
+  position : absolute;
+  margin:0;
+  left : 90px;
+}
+
+#lab3text h4{
+  font-size: 35px;
+}
+#lab3text h3{
+  font-size : 70px;
+  color : whitesmoke  ;
+}
+
+#eventext {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 145px;
+  color : black;
+  text-align: center;
+  position : absolute;
+  color : cyan  ;
+  display: flex;
+  justify-content: center;
+  right:50%;
+  left:50%;
+}
+
+

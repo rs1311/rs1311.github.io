@@ -72,26 +72,36 @@ h1{
 }
 
 #skillspage{
-  left : 830px;
+  right : 10%;
+  margin:0;
+  width: 475px;
   margin-top : 165px;
-  margin-left : 65px;
+  margin-left : 50px;
   position : absolute;
 }
 
 #achpage{
   margin-top : 165px;
-  margin-left : 120px;
+  margin-left : 10%;
   position : absolute;
 }
 
 #edpage{
-  left : 830px;
+  right : 10%;
+  margin:0;
   width: 475px;
   margin-top : 1200px;
   margin-left : 50px;
   position : absolute;
 }
 
+#projpage{
+  right : 10%;
+  margin:0;
+  margin-left : 10%;
+  margin-top : 2300px;
+  position : absolute;
+}
 
 h5{
   margin : 30px;

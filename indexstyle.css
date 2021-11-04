@@ -1,19 +1,127 @@
 body{
-  background-color: #000000;
+  background-color: lightgray;
   margin:0;
 }
   
 
+h2{
+  margin : 0;
+  margin-left: 65px;
+  font-family :monospace;
+  color: orangered;
+  text-decoration: none;
+  font-size: 100px;
+}
+
+h4{
+  margin : 0;
+  font-family :monospace;
+  color: orangered;
+  text-decoration: none;
+  font-size: 75px;
+}
+
 h3{
-  color : white;
-  font-family: monospace;
-  float:left;
-  margin-right : 10px
+  margin : 0;
+  margin-left: 65px;
+  font-family :monospace;
+  color: orangered;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+h1{
+  margin : 0;
+  border : 0;
+  font-family :monospace;
+  color: black;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+#achli{
+  margin : 0;
+  margin-left: 65px;
+  margin-bottom : 20px;
+  font-family :'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+#yr{
+  margin : 0;
+  margin-left: 65px;
+  font-family :monospace;
+  color: black;
+  text-decoration: none;
+  font-size: 35px;
+}
+
+#special{
+  margin : 0;
+  border : 0;
+  font-family :monospace;
+  color: black;
+  text-decoration: none;
+  font-size: 35px;
+}
+
+#aboutpage{
+  margin-top : 100px;
+}
+
+#skillspage{
+  left : 830px;
+  margin-top : 165px;
+  margin-left : 65px;
+  position : absolute;
+}
+
+#achpage{
+  margin-top : 165px;
+  margin-left : 120px;
+  position : absolute;
+}
+
+#edpage{
+  left : 830px;
+  width: 475px;
+  margin-top : 1200px;
+  margin-left : 50px;
+  position : absolute;
+}
+
+
+h5{
+  margin : 30px;
+  margin-left: 65px;
+  font-family :'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+p{
+  margin : 30px;
+  font-family :Arial, Helvetica, sans-serif;
+  color: black;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+#proli{
+  margin :0;
+  margin-bottom : 30px;
+  font-family :Arial, Helvetica, sans-serif;
+  color: black;
+  text-decoration: none;
+  font-size: 17px;
 }
 
 .navbar {
   width: 100%;
-  background-color: black;
+  background-color: gray;
   overflow: auto;
 }
 
@@ -29,12 +137,12 @@ h3{
 }
 
 .navbar a:hover {
-  background-color: #FF2800;
+  background-color: tomato;
   color : white;  
 }
 
 .active {
-  background-color: #6D6A75;
+  background-color: dimgray;
 }
 
 @media screen and (max-width: 500px) {
@@ -43,4 +151,3 @@ h3{
     display: block;
   }
 }
-

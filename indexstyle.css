@@ -72,26 +72,24 @@ h1{
 }
 
 #skillspage{
-  right : 10%;
   margin:0;
-  width: 475px;
+  margin-left : 68%;
+  width: 450px;
   margin-top : 165px;
-  margin-left : 50px;
   position : absolute;
 }
 
 #achpage{
   margin-top : 165px;
-  margin-left : 10%;
+  margin-left : 5%;
   position : absolute;
 }
 
 #edpage{
-  right : 10%;
   margin:0;
-  width: 475px;
-  margin-top : 1300px;
-  margin-left : 50px;
+  margin-left : 68%;
+  width: 450px;
+  margin-top : 1300px;  
   position : absolute;
 }
 
@@ -107,7 +105,7 @@ h1{
   right : 10%;
   margin:0;
   margin-left : 10%;
-  margin-top : 3700px;
+  margin-top : 3900px;
   position : absolute;
 }
 
@@ -115,7 +113,7 @@ h1{
   right : 10%;
   margin:0;
   margin-left : 10%;
-  margin-top : 4500px;
+  margin-top : 4900px;
   position : absolute;
 }
 
@@ -124,7 +122,7 @@ h1{
   right : 10%;
   margin:0;
   margin-left : 10%;
-  margin-top : 5650px;
+  margin-top : 6300px;
   position : absolute;
 }
 
@@ -155,7 +153,6 @@ p{
 }
 
 .navbar {
-  width: 100%;
   background-color: gray;
   overflow: auto;
 }
@@ -186,3 +183,4 @@ p{
     display: block;
   }
 }
+

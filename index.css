@@ -1,0 +1,184 @@
+html{
+    background-color:black;
+}
+#mainpic{
+    margin:0;
+    opacity: 30%;
+    position:absolute;
+    width:99%;
+    height:auto;
+}
+
+#skills{
+    margin:0;
+    opacity: 30%;
+    position:absolute;
+    width:99%;
+    height:auto;
+    margin-top: 70%;
+}
+
+#journey{
+    margin:0;
+    opacity: 30%;
+    position:absolute;
+    width:99%;
+    height:auto;
+    margin-top: 120%;
+}
+
+h1{
+    margin:0;   
+    width:60%;
+    position: absolute;
+    display: block;
+    color: white;
+    margin-left:10%;
+    margin-top:10%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size:450%;
+}
+
+
+
+
+#skillstitle{
+    margin:0;   
+    width:60%;
+    position: absolute;
+    display: block;
+    color: white;
+    margin-left:10%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size:450%;
+    margin-top:80%;
+}
+
+#journeytitle{
+    margin:0;   
+    width:60%;
+    position: absolute;
+    display: block;
+    color: white;
+    margin-left:10%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size:450%;
+    margin-top:125%;
+}
+
+
+
+#TOTT{
+    margin:0;
+    margin-left:10%;
+    margin-top:130%;
+    width:60%;
+    position: absolute;
+    color: white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:200%;
+}
+
+#TOTI{
+    margin:0;
+    margin-left:10%;
+    margin-top:155%;
+    width:60%;
+    position: absolute;
+    color: white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:200%;
+}
+
+#TOTO{
+    margin:0;
+    margin-left:10%;
+    margin-top:185%;
+    width:60%;
+    position: absolute;
+    color: white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:200%;
+}
+
+#TOIN{
+    margin:0;
+    margin-left:10%;
+    margin-top:210%;
+    width:60%;
+    position: absolute;
+    color: white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:200%;
+}
+
+#TOIE{
+    margin:0;
+    margin-left:10%;
+    margin-top:240%;
+    width:60%;
+    position: absolute;
+    color: white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:200%;
+}
+
+#TOIS{
+    margin:0;
+    margin-left:10%;
+    margin-top:268%;
+    width:60%;
+    position: absolute;
+    color: white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:200%;
+}
+
+b{
+    font-size:225%;
+}
+
+p{
+    margin:0;   
+    width:60%;
+    position: absolute;
+    color: white;
+    margin-left:10%;
+    margin-top:25%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size:180%;
+}
+
+h3{
+    margin:0;   
+    width:30%;
+    position: absolute;
+    color: white;
+    margin-left:45%;
+    margin-top:60%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size:100%;
+}
+#skills1{
+    margin:0;   
+    width:60%;
+    position: absolute;
+    display: block;
+    color: white;
+    margin-left:-12%;
+    margin-top:87%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size:140%;
+    text-align: right;
+}
+#skills2{
+    margin:0;   
+    width:40%;
+    position: absolute;
+    display: block;
+    color: white;
+    margin-left:52%;
+    margin-top:87%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size:140%;
+}

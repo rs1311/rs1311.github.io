@@ -3281,16 +3281,24 @@ button.btn2{
 .travelCountryName{ color:#fff; font-weight:650; }
 .travelCountryCount{ color: rgba(255,255,255,0.75); font-variant-numeric: tabular-nums; }
 
-/* Mobile: stack so it never overlays the globe */
-@media (max-width: 820px){
-  .travelGlobeWrap{ grid-template-columns: 1fr; }
-  .travelCountriesPanel{ max-height: none; }
-  .travelCountriesList{ max-height: 420px; }
+
+/* Ensure the dock never exceeds the viewport width */
+.iconDock{
+  max-width: calc(100vw - 16px);
+  box-sizing: border-box;
 }
 
-@media (max-width: 480px) {
-  .bottom-bar {
-    transform: scale(0.8);
+/* Phones: scale the whole dock down until it fits */
+@media (max-width: 520px){
+  .iconDock{
+    transform: translateX(-50%) scale(0.88);
     transform-origin: center bottom;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 380px){
+  .iconDock{
+    transform: translateX(-50%) scale(0.82);
   }
 }

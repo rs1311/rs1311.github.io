@@ -3290,7 +3290,7 @@ button.btn2{
 
 @media (max-width: 480px) {
   .bottom-bar {
-    transform: scale(0.92);
+    transform: scale(0.8);
     transform-origin: center bottom;
   }
 }

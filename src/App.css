@@ -3287,3 +3287,10 @@ button.btn2{
   .travelCountriesPanel{ max-height: none; }
   .travelCountriesList{ max-height: 420px; }
 }
+
+@media (max-width: 480px) {
+  .bottom-bar {
+    transform: scale(0.92);
+    transform-origin: center bottom;
+  }
+}

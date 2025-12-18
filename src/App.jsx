@@ -1612,159 +1612,6 @@ function Research() {
 }
 
 
-
-function Gaming() {
-  const { goToSection } = useSectionNav();
-
-  const games = [
-    // === Signature / Long-term ===
-    { title: "Warframe", hours: 500, img: "/gaming/warframe.jpg", desc: "Gauss main who loves blowing stuff up with the Nataruk and stuck to the Kronen Prime." },
-    { title: "Destiny 2", hours: 100, img: "/gaming/destiny2.jpg", desc: "Warlock who just adores the game for its design and style. Big guns go BOOM." },
-    { title: "Minecraft", hours: 1000, img: "/gaming/minecraft.jpg", desc: "Redstone engineer who is horrifying at combat yet loves playing Bedwars with friends." },
-    { title: "Hades", hours: 50, img: "/gaming/hades.jpg", desc: "It's okay, let my shield talk. I love slicing through enemies and dashing around." },
-    { title: "Stardew Valley", hours: 300, img: "/gaming/stardew.jpg", desc: "Haven't maxed out yet, still grinding through Qi's shenanigans." },
-    { title: "Splitgate", hours: 100, img: "/gaming/splitgate.jpg", desc: "Honestly I just love the mechanics of the game, it makes me feel like a scientist." },
-    { title: "Cyberpunk", hours: 0, img: "/gaming/cyberpunk.jpg", desc: "TRUST ME I'm going to play this soon." },
-
-
-    // === Assassin’s Creed ===
-    { title: "Assassin’s Creed", hours: 300, img: "/gaming/ac.jpg", desc: "Across Syndicate, Revelations, II, III, Black Flag and Unity, I have loved every bit of the series." },
-    
-    // === Nintendo / Console ===
-    { title: "Luigi’s Mansion", hours: 10, img: "/gaming/luigi.jpg", desc: "Atmosphere-driven puzzle exploration." },
-    { title: "Mario Kart", hours: 300, img: "/gaming/mariokart.jpg", desc: "Reflex racing and spatial timing." },
-    { title: "Super Smash Bros", hours: 150, img: "/gaming/smash.jpg", desc: "Mechanical execution and matchup knowledge." },
-    { title: "Pokémon Violet", hours: 5, img: "/gaming/pokemon.jpg", desc: "Open-world RPG progression." },
-
-    // === Indie / Narrative ===
-    { title: "Undertale", hours: 5, img: "/gaming/undertale.jpg", desc: "Narrative subversion and player agency." },
-    { title: "Deltarune", hours: 3, img: "/gaming/deltarune.jpg", desc: "Character-driven episodic storytelling." },
-    { title: "Cult of the Lamb", hours: 50, img: "/gaming/cotl.jpg", desc: "Base building blended with combat loops." },
-    { title: "Hue", hours: 5, img: "/gaming/hue.jpg", desc: "Visual logic and minimalist puzzle design." },
-    { title: "Cuphead", hours: 5, img: "/gaming/cuphead.jpg", desc: "Pattern mastery and execution under pressure." },
-
-    // === RPG / Open World ===
-    { title: "Skyrim", hours: 5, img: "/gaming/skyrim.jpg", desc: "Incredible storyline. Really hard." },
-
-    // === Shooters / Competitive ===
-    { title: "Overwatch", hours: 10, img: "/gaming/overwatch.jpg", desc: "Tracer is fun, great game, didn't get to play much though." },
-    { title: "Valorant", hours: 100, img: "/gaming/valorant.jpg", desc: "Got peer pressured into playing. I just use Neon and dash headfirst into the enemy." },
-    { title: "Apex Legends", hours: 10, img: "/gaming/apex.jpg", desc: "I liked this game, look forward to exploring it more." },
-    { title: "Fortnite", hours: 200, img: "/gaming/fortnite.jpg", desc: "Honest to god I really disliked this game, especially the projectile travel speed." },
-    { title: "Animal Crossing", hours: 30, img: "/gaming/animal.jpg", desc: "Amazing Game." },
-    { title: "Critical Ops", hours: 200, img: "/gaming/criticalops.jpg", desc: "Mobile tactical shooter fundamentals." },
-
-    // === Strategy / Simulation ===
-    { title: "RollerCoaster Tycoon", hours: 50, img: "/gaming/rct.jpg", desc: "Systems optimization and management." },
-    { title: "Krunker", hours: 250, img: "/gaming/krunker.jpg", desc: "I used to play this so much during lockdown. Just grab an SMG and sprint around." },
-    { title: "Freefall Tournament", hours: 50, img: "/gaming/fft.jpg", desc: "Systems optimization and management." },
-
-    // === Racing ===
-    { title: "Asphalt", hours: 90, img: "/gaming/asphalt.jpg", desc: "Arcade racing progression, across 8, nitro, moto and legends" },
-
-    // === Mobile / Casual (Grouped, Non-Normie) ===
-    { title: "Clash Royale", hours: 300, img: "/gaming/cr.jpg", desc: "Tower nuke logbait player who's now insanely overlevelled due to welcome back rewards." },
-    { title: "Brawl Stars", hours: 250, img: "/gaming/brawlstars.jpg", desc: "Leon and Crow main who has surprisingly good RNG luck and loves playing knockout." },
-    { title: "Mario Party", hours: 180, img: "/gaming/marioparty.jpg", desc: "I have played various versions of this on both the Wii and 3DS" },
-    { title: "Maimai", hours: 30, img: "/gaming/maimai.jpg", desc: "Too many people around me play this so I play it. Vampire is a great song." },
-    { title: "Soul Knight", hours: 300, img: "/gaming/soulknight.jpg", desc: "Mobile roguelike mechanics." },
-    { title: "Geometry Dash", hours: 300, img: "/gaming/geometrydash.jpg", desc: "In 2019 I played every single version, and finished it apart from the demons." },
-    { title: "Plague Inc.", hours: 10, img: "/gaming/plagueinc.jpg", desc: "Simulation-based strategy." },
-    { title: "Bad Piggies", hours: 200, img: "/gaming/badpiggies.jpg", desc: "Physics-driven problem solving." },
-    { title: "Pokémon Go", hours: 50, img: "/gaming/pokemongo.jpg", desc: "Real-world exploration loop." },
-    { title: "Identity V", hours: 20, img: "/gaming/identityv.jpg", desc: "Asymmetric multiplayer design." },
-    { title: "Zombs Royale", hours: 200, img: "/gaming/zombs.jpg", desc: "Lightweight battle royale." },
-  ];
-
-
-  return (
-    <div className="pageWrap">
-      {/* Header */}
-      <header className="hero2">
-        <div className="hero2-bg" />
-        <div className="hero2-inner">
-          <div className="hero2-top">
-            <div className="brandchip">
-              <span className="dot" />
-              <span>FIELD LOG</span>
-              <span className="sep">/</span>
-              <span>THE DERANGED ENGINEER</span>
-            </div>
-
-            <div className="hero2-icons">
-              <a href="https://github.com/rs1311" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
-              <a href="https://www.linkedin.com/in/raghav-sriram-8a0b23288/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
-              <a href="https://youtube.com/@deranged_engineer" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
-            </div>
-          </div>
-
-          <div className="heroTitleRow">
-            <img className="pfpTitle" src="/meraghav.jpg" alt="Raghav Sriram" loading="eager" />
-            <div className="heroTitles">
-              <h1 className="hero2-title">Raghav Sriram</h1>
-              <h2 className="hero2-title2">Hobbyist Gamer</h2>
-            </div>
-          </div>
-
-          <p className="hero2-sub">
-            In my generation, we grew up with games. The good kind, though.
-          </p>
-            <div className="heroQuickGrid">
-              <div className="heroQuick">
-                <div className="tkQuickK">Favourite Game</div>
-                <div className="tkQuickV">Warframe</div>
-                <div className="tkQuickS">Gauss Main</div>
-              </div>
-              <div className="heroQuick">
-                <div className="tkQuickK">Genres</div>
-                <div className="tkQuickV">Action · Roguelike</div>
-                <div className="tkQuickS">I have a type</div>
-              </div>
-              <div className="heroQuick">
-                <div className="tkQuickK">Platforms Used</div>
-                <div className="tkQuickV">6</div>
-                <div className="tkQuickS">PC, Switch, 3DS, Wii, GameCube, Android</div>
-              </div>
-            </div>
-
-          <div className="hero2-cta">
-            
-            
-            <button className="btn2" type="button" onClick={() => goToSection("/gaming", "gamegrid")}>
-              Gallery
-            </button>
-          </div>
-        </div>
-      </header>
-
-
-      {/* Games Grid */}
-      <section className="section2" id="gamegrid">
-        <div className="gamingGrid">
-          
-          {games.sort((a, b) => b.hours - a.hours).map((g) => (
-            <article className="gameCard" key={g.title}>
-              <div className="gameThumb">
-                <img src={g.img} alt={g.title} loading="lazy" />
-              </div>
-
-              <div className="gameBody">
-                <div className="gameTop">
-                  <h3 className="gameItemTitle">{g.title}</h3>
-                  <span className="gameHours">{g.hours}+ hrs</span>
-                </div>
-
-                <p className="gameDesc">{g.desc}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-}
-
-
 function Lockpicking() {
   const { goToSection } = useSectionNav();
 
@@ -2230,7 +2077,6 @@ function IconMenu() {
     { to: "/lockpicking", label: "Lockpicking", icon: <FaLockOpen /> },
     { to: "/research", label: "Research Work", icon: <FaPenNib /> },
     { to: "/travel", label: "Travel", icon: <FaGlobe /> },
-    { to: "/gaming", label: "Gaming", icon: <FaGamepad /> },
   ];
 
   return (
@@ -2263,7 +2109,6 @@ export default function App() {
         <Route path="/taekwondo" element={<Taekwondo />} />
         <Route path="/motorsports" element={<Motorsports />} />
         <Route path="/research" element={<Research />} />
-        <Route path="/gaming" element={<Gaming />} />
         <Route path="/lockpicking" element={<Lockpicking />} />
         <Route path="/travel" element={<Travel />} />
       </Routes>

@@ -117,9 +117,9 @@ function Home() {
           <div className="hero2-top">
             <div className="brandchip">
               <span className="dot" />
-              <span>FIELD LOG</span>
-              <span className="sep">/</span>
               <span>THE DERANGED ENGINEER</span>
+              <span className="sep">/</span>
+              <span>TECH</span>
             </div>
 
             <div className="hero2-icons">
@@ -808,7 +808,7 @@ function TheatreArts() {
             <div className="taLedgerChip"><FaCertificate /> ATCL Diploma: {trinity.atcl}</div>
           </div>
           <div className="taLedgerSub">
-            A record of assessed performance. Topics range from literature and theatre to technology, rhetoric, and persuasion.
+            A record of assessed performance. Topics range from literature and theatre to rhetoric and persuasion.
           </div>
         </div>
 
@@ -927,14 +927,14 @@ function Taekwondo() {
   // /public/taekwondo/mid/
   // /public/taekwondo/current/
   const gallery = [
-    { era: "Early years", img: "/taekwondo/early1.jpg" },
-    { era: "Early years", img: "/taekwondo/early2.jpg" },
+    { era: "Early years", img: "/taekwondo/t5.png" },
+    { era: "Early years", img: "/taekwondo/t4.jpg" },
 
-    { era: "Developing years", img: "/taekwondo/mid1.jpg" },
-    { era: "Developing years", img: "/taekwondo/mid2.jpg" },
+    { era: "Developing years", img: "/taekwondo/t7.JPG" },
+    { era: "Developing years", img: "/taekwondo/t3.png" },
 
-    { era: "Present day", img: "/taekwondo/current1.jpg" },
-    { era: "Present day", img: "/taekwondo/current2.jpg" },
+    { era: "Present day", img: "/taekwondo/t2.jpg" },
+    { era: "Present day", img: "/taekwondo/t1.jpg" },
   ];
 
   const skillStack = [
@@ -1042,14 +1042,14 @@ function Taekwondo() {
               {[
                 {
                   org: "Hyun Taekwondo Academy",
-                  note: "2015 - 2017 (White Belt -> Red-Black Belt)",
+                  note: "2015 - 2017 (White -> Red)",
                 },
                 {
                   org: "Lions Taekwondo Academy",
                   note: "2018 - 2024 (Red-Black -> Dan 2)",
                 },
                 {
-                  org: "World Champions Taekwondo Academy (Singapore)",
+                  org: "World Champions Taekwondo Academy",
                   note: "2025 - 2026 (Dan 2 -> Dan 3)",
                 },
               ].map((s, i) => (
@@ -1127,7 +1127,7 @@ function Motorsports() {
               <img className="pfpTitle" src="/meraghav.jpg" alt="Raghav Sriram" loading="eager" />
               <div className="heroTitles">
                 <h1 className="hero2-title">Raghav Sriram</h1>
-                <h2 className="hero2-title2">Speed Enthusiast · Prospecting Pilot</h2>
+                <h2 className="hero2-title2">Motorsport Enthusiast · Prospecting Student Pilot</h2>
               </div>
             </div>
 
@@ -1147,7 +1147,7 @@ function Motorsports() {
                   <div className="tkQuickS">SG · Dubai · MY · Vietnam</div>
                 </div>
                 <div className="heroQuick">
-                  <div className="tkQuickK">Road</div>
+                  <div className="tkQuickK">Motorbikes</div>
                   <div className="tkQuickV">150cc</div>
                   <div className="tkQuickS">Class 2B in progress</div>
                 </div>
@@ -1198,7 +1198,7 @@ function Motorsports() {
             <h3 className="msMiniHead">All-Terrain Vehicles</h3>
             <p className="msBody">
               400cc ATVs across mixed terrain environments.
-              Focus on throttle modulation, body positioning, and terrain reading.
+              Incredible way to absolutely wreck hostile and dangerous terrain and explore.
             </p>
             <div className="msBadges">
               <span className="msBadge">400cc</span>
@@ -1211,7 +1211,7 @@ function Motorsports() {
             <h3 className="msMiniHead">Kart Racing</h3>
             <p className="msBody">
               Indoor and outdoor karting from entry-level to higher-power platforms.
-              Emphasis on racing lines, braking consistency, and situational awareness.
+              Focus on racing lines and situational awareness (for me, not spacing out).
             </p>
             <div className="msBadges">
               <span className="msBadge">50cc</span>
@@ -1225,7 +1225,7 @@ function Motorsports() {
             <h3 className="msMiniHead">Motorcycles</h3>
             <p className="msBody">
               Regular riding on 150cc motorcycles.
-              Developing road discipline, hazard anticipation, and mechanical sympathy.
+              Developing road discipline, hazard anticipation, and a LOT of patience.
             </p>
             <div className="msBadges">
               <span className="msBadge">150cc</span>
@@ -1270,9 +1270,7 @@ function Motorsports() {
             <h3 className="miniHead">Aviation (early)</h3>
             <p className="msBody">
               I am also working toward a pilot’s license.  
-              There is nothing to show yet — and that is intentional.
-              For now, this remains a future extension of the same instinct:
-              understanding systems in motion.
+              Currently studying theory, learning practical skills. Hopefully I can get started on simulations and more PPL training once NS ends and I am overseas.
             </p>
             <div className="msBadges">
               <span className="msBadge">Theory first</span>
@@ -1292,7 +1290,7 @@ function Motorsports() {
           <h3 className="miniHead">Media archive</h3>
           <p className="msBody">
             I have extensive photos and videos across countries, vehicles, and years.
-            This gallery will be added once curated into a coherent progression narrative.
+            Just chill out and wait, I will add everything.
           </p>
         </div>
       </section>
@@ -1315,89 +1313,85 @@ function Research() {
 
   const publications = [
     {
-      title: "Paper 01",
+      title: "TroopDrop : Military Applications of LiDar Tech",
+      venue: "Github",
+      year: "2022",
+      desc:
+        "TroopDrop proposes a battlefield awareness system that overlays real-time intel: positions, troops, hazards, and medical routes directly onto soldiers’ vision using data from LiDAR, ML and aerial imaging.",
+      img: "/research/troopdrop.jpg",
+      link: "https://docs.google.com/document/d/1vuvTYZdB8s4MjiwKac1omQTS_RwdHjFt_pgg43cS_SU/edit?usp=sharing",
+      tags: ["LiDar", "Electronics"],
+    },
+    {
+      title: "An Overview of Assuring Fault Tolerance in Quantum Computing Through Quantum Error Correction",
       venue: "OSF Preprint",
       year: "2025",
       desc:
         "Exploration of fault tolerance using quantum error correction against noisy environments, focusing on what breaks and why.",
-      img: "/research/paper1.jpg",
+      img: "/research/FTQC.jpg",
       link: "https://osf.io/e67tz",
       tags: ["Fault tolerance", "QEC", "Noise"],
     },
     {
-      title: "Paper 02",
-      venue: "In preparation",
-      year: "2026",
-      desc:
-        "Structured synthesis of definitions, assumptions, and practical constraints in quantum systems.",
-      img: "/research/paper2.jpg",
-      link: "#",
-      tags: ["Survey", "Architecture"],
-    },
-    {
-      title: "Paper 03",
+      title: "Quantum Machine Learning Paper",
       venue: "In progress",
       year: "2026",
       desc:
-        "Simulation-driven notes on decoder behavior, failure modes, and generalizable lessons.",
+        "Its a secret :) But so far I have been investigating and simulating the mechanics behind Quantum SVMs and CNNs and why they may have interesting real world applications.",
       img: "/research/paper3.jpg",
       link: "#",
-      tags: ["Simulation", "Decoding"],
+      tags: ["QML"],
     },
   ];
 
   // Knowledge map / roadmap (replace titles later if you want)
   const map = [
     {
-      title: "Foundations",
-      img: "/research/map1.jpg",
+      title: "Quantum Cryptography",
+      img: "https://images.unsplash.com/photo-1667124060133-c1074b0124be?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       lines: [
-        "Formal definitions: noise, channels, fault tolerance",
-        "What assumptions are allowed, and which are illegal",
-        "Where intuition fails",
+        "Information-theoretic security from quantum mechanics",
+        "Protocols: QKD, device-independent schemes, and post-quantum intersections",
+        "Practical attack surfaces",
       ],
-      tags: ["Definitions", "Noise models", "Scope"],
+      tags: ["BB84", "QKD", "Postquantum"],
     },
     {
-      title: "Error Correction",
-      img: "/research/map2.jpg",
+      title: "Quantum Error Correction",
+      img: "https://images.unsplash.com/photo-1610337673044-720471f83677?q=80&w=1072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       lines: [
-        "Code families as engineering decisions",
-        "Threshold thinking, overhead, scaling behavior",
-        "Failure modes, not marketing",
+        "Encoding logical qubits into entangled physical qubits",
+        "Threshold theorems and surface codes",
+        "Resource overheads and decoding as the central engineering bottleneck",
       ],
       tags: ["QEC", "Thresholds", "Overhead"],
     },
     {
-      title: "Decoding and Reality",
-      img: "/research/map3.jpg",
+      title: "Quantum Machine Learning",
+      img: "https://images.unsplash.com/photo-1674027444454-97b822a997b6?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       lines: [
-        "Decoder behavior under adversarial conditions",
-        "What breaks first under resource constraints",
-        "How to measure progress without lying to yourself",
+        "Hybrid quantum–classical models",
+        "Where quantum advantage is plausible",
+        "Data encoding, noise sensitivity, and scalability",
       ],
-      tags: ["Decoders", "Metrics", "Failure analysis"],
+      tags: ["QSVMS", "QCNNS", "Noise"],
     },
     {
-      title: "Architecture and Systems",
-      img: "/research/map4.jpg",
+      title: "Quantum Hardware",
+      img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       lines: [
-        "Mapping theory onto hardware constraints",
-        "Tradeoffs across layers",
-        "What a deployable stack would require",
+        "Physical qubit platforms",
+        "Noise sources: decoherence, crosstalk, calibration drift",
+        "Scaling challenges from single qubits",
       ],
-      tags: ["Architecture", "Scheduling", "Systems"],
+      tags: ["Architecture", "Scaling", "Systems"],
     },
   ];
 
   // Gallery (swap to real images later)
   const gallery = [
-    { src: "/research/gallery1.jpg", label: "Annotated paper margins (working notes)" },
-    { src: "/research/gallery2.jpg", label: "Experiment snapshot: noise sweep" },
-    { src: "/research/gallery3.jpg", label: "Decoder intuition sketch" },
-    { src: "/research/gallery4.jpg", label: "System boundary diagram" },
-    { src: "/research/gallery5.jpg", label: "Draft figure: overhead tradeoffs" },
-    { src: "/research/gallery6.jpg", label: "Research timeline board" },
+    { src: "/research/CQTQuant.jpg", label: "My first time seeing a Quantum Computer" },
+    { src: "/research/Mywork.jpg", label: "Notes from studying Quantum Computing" },
   ];
 
   return (
@@ -1409,9 +1403,9 @@ function Research() {
           <div className="hero2-top">
             <div className="brandchip">
               <span className="dot" />
-              <span>FIELD LOG</span>
-              <span className="sep">/</span>
               <span>THE DERANGED ENGINEER</span>
+              <span className="sep">/</span>
+              <span>RESEARCH</span>
             </div>
 
             <div className="hero2-icons">
@@ -1425,29 +1419,28 @@ function Research() {
             <img className="pfpTitle" src="/meraghav.jpg" alt="Raghav Sriram" loading="eager" />
             <div className="heroTitles">
               <h1 className="hero2-title">Raghav Sriram</h1>
-              <h2 className="hero2-title2">Electronic Engineer · Security Hobbyist</h2>
+              <h2 className="hero2-title2">Quantum Computing Researcher · STEM Writer</h2>
             </div>
           </div>
 
           <p className="hero2-sub">
-            I build at the edge of systems: low-level software, electronics, architecture, and applied security.
-            If it’s off the beaten path, I’m probably assembling it.
+            I have been a researcher for many years now. I specifically focus on Quantum Computing and Electronic Engineering. I do enjoy learning, teaching and writing. Check out resonanceblog.net :)
           </p>
             <div className="heroQuickGrid">
               <div className="heroQuick">
                 <div className="tkQuickK">Field</div>
                 <div className="tkQuickV">Quantum Computing</div>
-                <div className="tkQuickS">Low-level · signals · security</div>
+                <div className="tkQuickS">Fault Tolerance · Security · Machine Learning</div>
               </div>
               <div className="heroQuick">
-                <div className="tkQuickK">Mode</div>
-                <div className="tkQuickV">Research + Experiments</div>
-                <div className="tkQuickS">Low-level · signals · security</div>
+                <div className="tkQuickK">Papers Written</div>
+                <div className="tkQuickV">3+</div>
+                <div className="tkQuickS">Across various sectors</div>
               </div>
               <div className="heroQuick">
-                <div className="tkQuickK">Output</div>
-                <div className="tkQuickV">Papers · Artifacts</div>
-                <div className="tkQuickS">Low-level · signals · security</div>
+                <div className="tkQuickK">Articles Written</div>
+                <div className="tkQuickV">20+</div>
+                <div className="tkQuickS">resonanceblog.net</div>
               </div>
             </div>
           <div className="hero2-cta">
@@ -1477,16 +1470,9 @@ function Research() {
 
         <div className="panel2">
           <p className="lead">
-            My focus is not novelty for its own sake. I care about correctness,
-            explicit assumptions, and communicating ideas so they can be tested,
-            challenged, and built upon.
+            I research Quantum Computing, specifically Fault Tolerant Quantum Computing, Quantum Error Correction, Quantum Machine Learning and Quantum Cryptography. Sometimes, I may do research work into Signals and Electronics. I love open sourcing my work.
           </p>
 
-          <div className="skillPills" style={{ marginTop: "0.8rem" }}>
-            {focus.map((f) => (
-              <span className="pill" key={f}>{f}</span>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -1599,9 +1585,7 @@ function Research() {
               </h3>
 
               <div style={{ padding: "0 1.1rem 1.1rem" }}>
-                <p className="projectDesc" style={{ margin: "0.55rem 0 0" }}>
-                  Swap filenames in <code>/public/research/</code> to your real artifacts.
-                </p>
+                
               </div>
             </article>
           ))}
@@ -1740,20 +1724,20 @@ function Lockpicking() {
             <div className="heroQuickGrid">
               <div className="heroQuick">
                 <div className="tkQuickK">Focus</div>
-                <div className="tkQuickV">Systems</div>
-                <div className="tkQuickS">Low-level · signals · security</div>
+                <div className="tkQuickV">Low Level Exploitation</div>
+                <div className="tkQuickS">Signals and Hardware</div>
               </div>
 
               <div className="heroQuick">
-                <div className="tkQuickK">Current</div>
-                <div className="tkQuickV">NS + Research</div>
-                <div className="tkQuickS">Building in parallel</div>
+                <div className="tkQuickK">Learning Style</div>
+                <div className="tkQuickV">Practical on-field</div>
+                <div className="tkQuickS">Theory can only get you so far</div>
               </div>
 
               <div className="heroQuick">
-                <div className="tkQuickK">Mode</div>
-                <div className="tkQuickV">Field-first</div>
-                <div className="tkQuickS">Build → break → learn</div>
+                <div className="tkQuickK">Locks Broken Into</div>
+                <div className="tkQuickV">Too many to count</div>
+                <div className="tkQuickS">Though I do not do anything illegal :)</div>
               </div>
             </div>
 
@@ -1975,7 +1959,7 @@ function Travel() {
         <div className="hero2-inner">
           <div className="brandchip">
             <span className="dot" />
-            <span>FIELD LOG</span>
+            <span>THE DERANGED ENGINEER</span>
             <span className="sep">/</span>
             <span>TRAVEL</span>
           </div>
@@ -1984,7 +1968,7 @@ function Travel() {
             <img className="pfpTitle" src="/meraghav.jpg" alt="Raghav Sriram" loading="eager" />
             <div className="heroTitles">
               <h1 className="hero2-title">Raghav Sriram</h1>
-              <h2 className="hero2-title2">Serial Travel Lover</h2>
+              <h2 className="hero2-title2">Serial Backpacker · Adventurer</h2>
             </div>
           </div>
 

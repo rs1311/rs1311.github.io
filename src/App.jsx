@@ -1,64 +1,290 @@
-import React from "react";
-import './App.css';
-import { FaGithub, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import "./App.css";
+import { Routes, Route, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Globe from "react-globe.gl";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaYoutube,
+  FaTheaterMasks,
+  FaFistRaised,
+  FaFlagCheckered,
+  FaPenNib,
+  FaGamepad,
+  FaLock,
+  FaHome,
+  FaHorseHead,
+  FaGlobe,
+  FaBroadcastTower,
+  FaLightbulb,
+  FaCode,
+  FaMusic,
+  FaFilm,
+  FaMicrophoneAlt,
+  FaAward,
+  FaGlobeAsia,
+  FaStar,
+  FaLockOpen,
+  FaMedal,
+  FaCertificate,
+  FaRobot,
+} from "react-icons/fa";
+import { FaExplosion, FaGun } from "react-icons/fa6";
+import ScrollToTop from "./ScrollToTop.jsx";
+/* ---------------- Pages ---------------- */
 
-const App = () => {
+function useSectionNav() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goToSection = (path, id) => {
+    const scroll = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return true;
+      }
+      return false;
+    };
+
+    // If already on correct page, scroll now
+    if (location.pathname === path) {
+      if (!scroll()) requestAnimationFrame(scroll);
+      return;
+    }
+
+    // Otherwise navigate first, then wait for DOM to exist and scroll
+    navigate(path);
+
+    let tries = 0;
+    const tick = () => {
+      tries += 1;
+      if (scroll() || tries > 120) return; // ~2s at 60fps
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+
+  return { goToSection };
+}
+
+
+function Home() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goToSection = (id) => {
+    const scroll = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return true;
+      }
+      return false;
+    };
+
+    if (location.pathname === "/") {
+      if (!scroll()) requestAnimationFrame(scroll);
+      return;
+    }
+
+    navigate("/");
+
+    let tries = 0;
+    const tick = () => {
+      tries += 1;
+      if (scroll() || tries > 60) return;
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+
+  const projects = [
+    { title: "ArchelonOS", description: "I built my very own simple operating system using LFS.", link: "https://github.com/rs1311/ArchelonOS", linkname: "View Github", img: "/proj1.png" },
+    { title: "EventHorizon CubeSat", description: "Cube Satellite built using Raspberry PIs, Python and Linux. Capable of transmitting realtime geographical data via wireless comms.", link: "https://github.com/rs1311/eventhorizon", linkname: "View GitHub", img: "/proj2.jpg" },
+    { title: "Deranged-C", description: "A programming language. Built from scratch in C++ and named after its creator.", link: "https://github.com/rs1311/Deranged-C", linkname: "View GitHub", img: "/proj3.jpg" },
+    { title: "Umbra Graphics Engine", description: "Bare metal C++ rendering engine that uses vector graphics to display simulations of 3 dimensional geometric shapes.", link: "https://github.com/rs1311/UMBRA", linkname: "View GitHub", img: "/proj4.jpg" },
+    { title: "Jarvis Minor", description: "An operating system that uses computer vision to interact with the GUI. Has camera, gallery, calculator and socket messaging apps.", link: "https://github.com/rs1311/Jarvis-Minor", linkname: "View GitHub", img: "/proj5.jpg" },
+    { title: "VECTOR Transportation", description: "Transportation device that uses linetracking, manual control, object sensing and computer vision to sort and deliver cargo.", link: "https://www.youtube.com/playlist?list=PLplfnLT9DQYRcg-cFF8yfEpgVK5PvuqDX", linkname: "View YouTube", img: "/proj6.jpg" },
+  ];
+
   return (
-    <div className="app">
-      <div className="hero" style={{ backgroundImage: 'url(/teach.jpg)' }}>
-        <div className="overlay">
-          <h1 className="glitch" data-text="STEVEN MIDFIELD">RAGHAV SRIRAM</h1>
-          <p className="subtitle">Quantum Computing Researcher. Electronic Engineer. Hobbyist Hacker.</p>
-          <br></br>
-          <div className="icons">
-            <a href="https://github.com/rs1311" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-            <a href="https://www.linkedin.com/in/raghav-sriram-8a0b23288/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-            <a href="https://youtube.com/@deranged_engineer"><FaYoutube /></a>
+    <>
+      <header className="hero2">
+        <div className="hero2-bg" />
+        <div className="hero2-inner">
+          <div className="hero2-top">
+            <div className="brandchip">
+              <span className="dot" />
+              <span>FIELD LOG</span>
+              <span className="sep">/</span>
+              <span>THE DERANGED ENGINEER</span>
+            </div>
+
+            <div className="hero2-icons">
+              <a href="https://github.com/rs1311" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
+              <a href="https://www.linkedin.com/in/raghav-sriram-8a0b23288/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+              <a href="https://youtube.com/@deranged_engineer" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
+            </div>
+          </div>
+
+          <div className="heroTitleRow">
+            <img className="pfpTitle" src="/meraghav.jpg" alt="Raghav Sriram" loading="eager" />
+            <div className="heroTitles">
+              <h1 className="hero2-title">Raghav Sriram</h1>
+              <h2 className="hero2-title2">Electronic Engineer · Quantum Computing Researcher</h2>
+            </div>
+          </div>
+
+          <p className="hero2-sub">
+            My work revolves around low-level systems, electronics, embedded, RF, data and signals. 
+            If it’s off the beaten path, I’m probably building / breaking it.
+          </p>
+            <div className="heroQuickGrid">
+              <div className="heroQuick">
+                <div className="tkQuickK">Field of Expertise</div>
+                <div className="tkQuickV">Electronics</div>
+                <div className="tkQuickS">Low-level · signals · security</div>
+              </div>
+
+              <div className="heroQuick">
+                <div className="tkQuickK">What I'm up to now</div>
+                <div className="tkQuickV">Signals (Army)</div>
+                <div className="tkQuickS">Building in parallel</div>
+              </div>
+
+              <div className="heroQuick">
+                <div className="tkQuickK">What's next for me</div>
+                <div className="tkQuickV">MEng EEE (Uni)</div>
+                <div className="tkQuickS">Masters of Engineering in the UK</div>
+              </div>
+            </div>
+
+          <div className="hero2-cta">
+            
+            <button className="btn2 primary" type="button" onClick={() => goToSection("projects")}>
+              View Projects
+            </button>
+            <button className="btn2" type="button" onClick={() => goToSection("skills")}>
+              Skills
+            </button>
+            <button className="btn2" type="button" onClick={() => goToSection("experience")}>
+              Experience
+            </button>
+            <button className="btn2" type="button" onClick={() => goToSection("projects")}>
+              Projects
+            </button>
+            <button className="btn2" type="button" onClick={() => goToSection("extras")}>
+              Extras
+            </button>
+            <button className="btn2" type="button" onClick={() => goToSection("certifications")}>
+              Certifications
+            </button>
           </div>
         </div>
-      </div>
+      </header>
 
-      <section className="intro">
-        <h2>// personal-introduction</h2>
-        <p>
-          Hi, I’m Raghav. I thrive at the intersection of code, creativity, and chaos. My work spans low-level systems, electronics, security and quantum computing. If it’s off the beaten path, I’m probably building it.
-        </p>
+      <section className="section2" id="experience">
+        <div className="sectionHead">
+          <span className="sig">// experience</span>
+          <span className="bar" />
+        </div>
+
+        <div className="twoCol">
+          <div className="panel2">
+            <h3 className="miniHead">Work</h3>
+            <div className="timeline2">
+              {[
+                { year: "2025–PRESENT", title: "Senior Command Infocomm Signaller", org: "Singapore Army" ,     icon: <FaGun/>},
+                { year: "2025–PRESENT", title: "Standards Contributor", org: "IEEE" ,     icon: <FaLightbulb/>},
+                { year: "2024–PRESENT", title: "Founder & Development Head", org: "Resonance" ,     icon: <FaBroadcastTower/>},
+                { year: "2024", title: "Engineering Intern", org: "Ferrari",     icon: <FaHorseHead/>},
+                { year: "2023", title: "IT & DevOps Intern", org: "V-Key Technologies" ,     icon: <FaCode/>},
+                { year: "2022–2023", title: "Programming Tutor", org: "Freelance" ,     icon: <FaExplosion/>},
+                { year: "2022", title: "Backend Programmer", org: "HAYDE!",     icon: <FaMusic/> },
+              ].map((it, i) => (
+                <div className="tItem" key={i}>
+                  <div className="tDot" />
+
+                  <div className="tMain">
+                    <div className="tRow">
+                      <div className="tOrgRow">
+                        <span className="tIcon">
+                          {it.icon}
+                        </span>
+
+                        <span className="tOrg">{it.org}</span>
+                      </div>
+                      <span className="tYear">{it.year}</span>
+                    </div>
+
+                    <div className="tRole">{it.title}</div>
+                  </div>
+                </div>
+
+              ))}
+            </div>
+          </div>
+
+          <div className="panel2">
+            <h3 className="miniHead">Education</h3>
+            <div className="edu2">
+              {[
+                {
+                  title: "Univeristy of __________",
+                  years: "2027",
+                  details: "Masters of Electrical & Electronic Engineering",
+                  subjects: "Let's see what awaits :)",
+                },
+                {
+                  title: "Victoria Junior College",
+                  years: "2023–2024",
+                  details: "Computing Talent Development Program",
+                  subjects: "GCE A Levels - Computing, Physics, Mathematics, Economics",
+                },
+                {
+                  title: "Victoria School",
+                  years: "2019–2022",
+                  details: "Physics & Math Talent Development Programs",
+                  subjects: "Integrated Programme - Phys, Maths, Chem, English, E-Lit, History, HTL",
+                },
+              ].map((e, i) => (
+                <div className="eduCard2" key={i}>
+                  <div className="eduTop">
+                    <div className="eduTitle">{e.title}</div>
+                    <div className="eduYears">{e.years}</div>
+                  </div>
+                  <div className="eduDetails">{e.details}</div>
+                  <div className="eduSubs">{e.subjects}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
+      <section className="section2" id="skills">
+        <div className="sectionHead">
+          <span className="sig">// skills</span>
+          <span className="bar" />
+        </div>
 
-      <section className="skills">
-        <h2>// skills</h2>
-        <div className="skills-panels">
+        <div className="skills2">
           {[
-            {
-              title: "embedded",
-              skills: ["C/C++", "Embedded C", "STM32", "Arduino", "ESP32", "ARM Cortex-M"]
-            },
-            {
-              title: "electronics",
-              skills: ["Logic Gates","ADC/DAC","Transistors","PID Control","Signal Processing","MultiSim"]
-            },
-            {
-              title: "architecture",
-              skills: ["ASM (x86,ARM)", "Ghidra", "Wireshark", "Static Analysis", "Protocol Fuzzing", "Binary Analysis"]
-            },
-            {
-              title: "reversing",
-              skills: ["Ghidra", "Binary Analysis", "Static Analysis", "Wireshark", "Protocol Fuzzing", "x86 Disassembly"]
-            },
-            {
-              title: "software",
-              skills: ["ReactJS", "Flask", "TKinter", "Android Studio", "HTML", "Unity"]
-            },
-            {
-              title: "quantum computing",
-              skills: ["Qiskit", "Cirq", "Q#", "PennyLane", "Key Distribution", "Error Correction"]
-            }
+            { title: "embedded / firmware", skills: ["C/C++", "Embedded C", "STM32", "Arduino", "ESP32", "ARM Cortex-M"] },
+            { title: "electronics", skills: ["PCB Design", "ADC/DAC", "Signals", "Power Electronics", "Circuit Design"] },
+            { title: "digital logic / fpgas", skills: ["Verilog", "Vivado", "Quartus", "Wishbone", "AXI","PCIe"] },
+            { title: "low level", skills: ["Linux", "POSIX", "Kernel Design", "Memory Handling", "ASM (x86,ARM)"] },
+            { title: "hacking", skills: ["Ghidra", "Binaries", "Firmware", "Metasploit", "Wireshark", "Burpsuite", "Secure Boot", "Cryptography","Flipper"] },
+            { title: "robotics / control", skills: ["ROS", "PID", "PWM", "Encoders", "Kalman Filter", "Sensor Fusion","SLAM", "VEX Robotics","mBot 2","cyberPI"] },
+            { title: "machine learning", skills: ["Python", "OpenCV", "NLTK", "Huggingface", "PyTorch", "SciKit", "TensorFlow", "NumPy", "SciPy", "Keras", "Seaborn"] },
+            { title: "software dev", skills: ["Javascript", "ReactJS", "TailwindCSS", "Android Studio", "Flask", "Unity", "DNS Config", "Hosting", "SEO", "Git"] },
           ].map((group, idx) => (
-            <div className="skill-panel" key={idx}>
-              <div className="skill-header">{`> ${group.title}`}</div>
-              <div className="skill-list">
-                {group.skills.map((skill, i) => (
-                  <p key={i}>• {skill}</p>
+            <div className="skillCard2" key={idx}>
+              <div className="skillCard2Head">{`> ${group.title}`}</div>
+              <div className="skillPills">
+                {group.skills.map((s) => (
+                  <span className="pill" key={s}>{s}</span>
                 ))}
               </div>
             </div>
@@ -66,228 +292,1981 @@ const App = () => {
         </div>
       </section>
 
+      
 
+      
+      <section className="section2" id="projects">
+        <div className="sectionHead">
+          <span className="sig">// featured-projects</span>
+          <span className="bar" />
+        </div>
 
+        <div className="projectGrid2">
+          {projects.map((p, idx) => (
+            <article className="projectCard2" key={idx}>
+              <div className="projectThumb">
+                <img src={p.img} alt={p.title} loading="lazy" />
+                <div className="projectShade" />
+                <div className="projectIndex">{String(idx + 1).padStart(2, "0")}</div>
+              </div>
 
-      <section className="gallery">
-        <h2>// hobbies</h2>
-        <div className="gallery-grid">
-          {[
-            { img: "pack1.jpg", caption: "Electronics" },
-            { img: "pack2.jpg", caption: "Lockpicking" },
-            { img: "pack3.jpg", caption: "Taekwondo" },
-            { img: "pack4.jpg", caption: "Theatre Arts" },
-            { img: "pack5.jpg", caption: "Quantum Physics" },
-            { img: "pack6.jpg", caption: "Motorsports" }
-          ].map((item, i) => (
-            <div key={i} className="gallery-item">
-              <img src={`/${item.img}`} alt={item.caption} />
-              <p className="caption">{item.caption}</p>
-            </div>
+              <h3 className="projectTitle">{p.title}</h3>
+              <p className="projectDesc">{p.description}</p>
+
+              <a className="projectLink" href={p.link} target="_blank" rel="noopener noreferrer">
+                {p.linkname} →
+              </a>
+            </article>
           ))}
         </div>
       </section>
 
-
-      <section className="projects">
-        <h2>// featured-projects</h2>
-        <div className="project-grid">
-          {[
-            {
-              title: "Quantum Computing Paper",
-              description: "Exploring fault tolerance in quantum computing by using error correction against noisy environments to preserve quantum information.",
-            },
-            {
-              title: "EventHorizon CubeSat",
-              description: "NLP-powered tool to detect and flag scam messages. Uses transformers for linguistic pattern analysis.",
-            },
-            {
-              title: "ArchelonOS",
-              description: "A custom bootable OS with a terminal UI and memory-mapped graphics. Built from scratch in C++ and named after an extinct turtle.",
-            },
-            {
-              title: "Umbra Graphics Engine", 
-              description: "Bare metal C++ rendering engine that uses vector graphics to display simulations of 3 dimensional geometric shapes.",
-            },
-            {
-              title: "Quantum Neural Network",
-              description: "Neural network built using pennylane. Proof of concept for Quantum Machine Learning models that can be developed.",
-            },
-            {
-              title: "VECTOR Transportation",
-              description: "Transportation device that uses linetracking, manual control, object sensing and computer vision to sort and deliver cargo.",
-            },
-          ].map((project, idx) => (
-            <div className="project-card" key={idx}>
-              <img src={`/proj${idx + 1}.jpg`} alt={project.title} />
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-            </div>
-          ))}
+      <section className="section2" id="extras">
+        <div className="sectionHead">
+          <span className="sig">// awards & activities</span>
+          <span className="bar" />
         </div>
-      </section>
 
-      <section className="work-experience">
-        <h2>// work-experience</h2>
-        <div className="vertical-timeline">
-          {[
-            {
-              year: "2025–2026",
-              title: "Senior Command Infocomm Signaller",
-              org: "Singapore Army"
-            },
-            {
-              year: "2024–2025",
-              title: "Quantum Computing Researcher",
-              org: "Independant"
-            },
-            {
-              year: "2024",
-              title: "Engineering Intern",
-              org: "Ferrari"
-            },
-            {
-              year: "2023",
-              title: "IT & DevOps Intern",
-              org: "V-Key Technologies"
-            },
-            {
-              year: "2022–2023",
-              title: "Programming Tutor",
-              org: "Independant"
-            },
-            {
-              year: "2022",
-              title: "Backend Programmer",
-              org: "HAYDE!"
-            }
-          ].map((item, i) => (
-            <div key={i} className="v-timeline-item">
-              <div className="v-timeline-dot" />
-              <div className="v-timeline-content">
-                <div className="v-timeline-row">
-                  <span className="v-timeline-role">{item.title} <span className="v-timeline-org"> {item.org}</span></span>
-                  <span className="v-timeline-year">{item.year}</span>
+        <div className="threeGrid">
+          <div className="panel2">
+            <h3 className="miniHead">Awards</h3>
+            <div className="list2">
+              {[
+                "Passionate Learner Award 2022",
+                "School Distinguished Service 2022",
+                "Academic Improvement Award 2021",
+                "EAGLES Award (2017, 2018, 2022)",
+              ].map((x) => (
+                <div className="listItem2" key={x}>
+                  <span className="spark" />
+                  <span>{x}</span>
                 </div>
+              ))}
+            </div>
+            <br></br>
+            <h3 className="miniHead">Events Organised</h3>
+            <div className="chips">
+              {[
+                "NUS HackNRoll 2024 – Organiser",
+                "DSTA-DSO-VJC Robo Challenge 2023 – Emcee",
+                "Ntnl Hackathon 2020 – Organiser",
+                "VS Mock-NOI 2023 – Organiser",
+                "JC Computing Students Conference – POC",
+                "Victoria Challenge 2019 – Leader",
+                "Decode & Conquer 2024 – Instructor",
+                "MultiLayer CyberSec 2024 – Lead",
+                "VSIFC Competitive C++ 2023 – Trainer",
+                "BuildingBloCS 2023 – HR Organiser",
+                "Project V 2023 – Emcee",
+                "Changi Simei CC Deepavali 2022 – Org Volunteer",
+                "Changi Simei CC Blood Drive 2022 – Org Volunteer",
+              ].map((a) => (
+                <div className="listItem2" key={a}>
+                  <span className="spark" />
+                  <span>{a}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="panel2">
+            <h3 className="miniHead">Extracurriculars</h3>
+            <div className="chips">
+              {[
+                "IEEE - Research Contributor",
+                "People's Association – Grassroots Leader",
+                "VS Infocomm Club – President '21",
+                "VS Physics SIG – President '20",
+                "VJC Cybersecurity Club – President '23",
+                "VS Infocomm Club – Programming Head '21",
+                "VJC Robotics Club – Electronics Head '23",
+                "VJC Computing Talent Dev Prog – Leader '23 '24",
+                "VS Physics Talent Dev Prog – Member '21 '22",
+                "VS Mathematics Talent Dev Prog – Member '22",
+                "BuildingBloCS – Human Resources '23",
+                "VS Infocomm Tech Board – Leader '21 '22",
+                "VS Social Innovation Board – Leader '20",
+                "VS Monitor's Council – Leader '19",
+                "VS AI Student Group – Member '22",
+                "PRW Drones Tech & Law – Member '23",
+                "VJC Orientation – Group Leader '24",
+                "National Day Parade - Regimental Colours '25",
+                "SAF Day Parade - Regimental Colours '25",
+                "42SAR NSF Council - Finance Club Leader '25 '26",
+                "42SAR NSF Council - Film Club Leader '25 '26",
+                "CZ Shark Scouts – President '17",
+                "CZ Innovation Club – Public Relations Officer '17",
+              ].map((t) => (
+                <div className="listItem2" key={t}>
+                  <span className="spark" />
+                  <span>{t}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="panel2">
+            <h3 className="miniHead">Competitions</h3>
+            <div className="list2">
+              {[
+                "Intl Math Modelling Competition Merit Award '22",
+                "Singapore Physics League Honourable Mention '23",
+                "SG Junior Physics Olym Honourable Mention '22",
+                "FPS International Champions '17",
+                "FPS International Vice-Champions '18",
+                "CMPS National Champions '16",
+                "CMPS National Champions '17",
+                "NUS HackNRoll '20",
+                "NUS HackNRoll '22",
+                "NUS HackNRoll '23",
+                "NUS HackNRoll '24",
+                "NUS HackNRoll '26",
+                "BuildingBloCS '23",
+                "SUTD RoboRoarZ '24",
+                "DSTA CDDC '24",
+                "DSTA Cyberthon '24",
+                "DSTA Brainhack SpaceCube '24",
+                "DSTA Brainhack AR/VR '24",
+                "PA NECDC Hackathon '23",
+                "The Earth Prize '23",
+                "Robomaster Youth International '23",
+                "MakeX '19",
+                "MakeX Spark '22",
+                "NYP SGCC '19",
+                "Singapore Math Olympiad '19",
+                "American Math Olympiad '22",
+                "National Olympiad of Informatics '20",
+                "National Olympiad of Informatics '21",
+              ].map((x) => (
+                <div className="listItem2" key={x}>
+                  <span className="spark" />
+                  <span>{x}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="section2" id="certifications">
+        <div className="sectionHead">
+          <span className="sig">// certifications</span>
+          <span className="bar" />
+        </div>
+
+        <div className="panel2">
+          <div className="certGrid">
+            {[
+              {
+                name: "CompTIA Security+",
+                status: "Working On",
+                detail: "Foundations of security, risk, and operations.",
+              },
+              {
+                name: "DSTA SpaceCube Course",
+                status: "Completed",
+                detail: "Learnt how to build a robotic cubesat.",
+              },
+              {
+                name: "SeeNTU Game Theory and Computational Statistics",
+                status: "Completed",
+                detail: "Learnt about game theory and matrices.",
+              },
+              {
+                name: " Google Cybersecurity Certificate",
+                status: "Completed",
+                detail: "Learnt about cybersecurity.",
+              },
+              {
+                name: "CQT QCamp Course",
+                status: "Completed",
+                detail: "Learnt more about quantum computing.",
+              },
+              {
+                name: "Duke University Python Scripting",
+                status: "Completed",
+                detail: "Just to prove a point.",
+              },
+              {
+                name: "Fractal Introduction to Quantum Computing",
+                status: "Completed",
+                detail: "Learnt the basics of quantum computing.",
+              },
+              {
+                name: "Starweaver Intro to Automotive Cybersecurity",
+                status: "Completed",
+                detail: "Learnt about interesting automotive systems and networks.",
+              },
+              {
+                name: "MathWorks Systems Engineering",
+                status: "Completed",
+                detail: "Learnt about systems and how they operate.",
+              },
+              {
+                name: "University at Buffalo Electric Power Systems",
+                status: "Completed",
+                detail: "Learnt about high voltage power electronics.",
+              },
+              {
+                name: "NYP Data, Cloud & Programming Essentials",
+                status: "Completed",
+                detail: "Learnt about networking and cloud.",
+              },
+              {
+                name: "ARM Cortex-M Processors Overview",
+                status: "Completed",
+                detail: "Learnt about embedded systems.",
+              },
+            ].map((c) => (
+              <div className="certCard" key={c.name}>
+                <div className="certTop">
+                  <div className="certName">{c.name}</div>
+                  <div className={`certStatus ${c.status === "Completed" ? "ok" : "todo"}`}>
+                    {c.status}
+                  </div>
+                </div>
+                <div className="certDetail">{c.detail}</div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+
+      <footer className="footer2">
+        <div>Contact: raghav@mensa.sg</div>
+        <div className="muted2">Yes, I built this myself in Vite + ReactJS</div>
+      </footer>
+    </>
+  );
+}
+
+function SimplePage({ title, subtitle }) {
+  return (
+    <section className="section2">
+      <div className="sectionHead">
+        <span className="sig">{`// ${title.toLowerCase()}`}</span>
+        <span className="bar" />
+      </div>
+
+      <div className="panel2 pagePanel">
+        <h1 className="pageTitle">{title}</h1>
+        <p className="pageSub">{subtitle}</p>
+        <p className="pageHint">
+          This page is wired. Next: give me your content blocks and I’ll turn each one into a unique portfolio layout.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function TheatreArts() {
+  const { goToSection } = useSectionNav();
+  const stats = useMemo(
+    () => ({
+      plays: 5,
+      films: 7,
+      total: 12,
+      years: 13,
+
+      sdd: { distinctions: 7, merits: 1, grades: ["Initiate", "1", "2", "3", "4", "6", "7", "8"], note: "Grade 8: Distinction" },
+      ps:  { distinctions: 6, merits: 1, grades: ["2", "3", "4", "5", "6", "7", "8"], note: "Grade 7–8: Distinction" },
+      pa:  { distinctions: 2, merits: 2, grades: ["Initiate", "1", "2", "5"] },
+
+      excellence: { year: 2019, grade: 5, note: "Certificate of Excellence (Highest scorer)" },
+
+      languages: ["English", "Tamil", "German (Basic)", "Russian (Basic)"],
+
+      genres: ["Political", "Horror", "Thriller", "Psychological" , "Comedy", "Fantasy", "Drama", "Satire", "Historical", "Shakespearean", "Singaporean", "Military"],
+    }),
+    []
+  );
+
+  // Put your images in /public/theatre/plays/ and /public/theatre/films/
+  // Replace titles + filenames with your real productions.
+  const plays = [
+    { title: "Arabian Nights, Marine Parade Theatre", role: "Role / Position", year: "YYYY", img: "/theatre/plays/play1.jpg" },
+    { title: "Alice In Wonderland, Marine Parade Theatre", role: "Role / Position", year: "YYYY", img: "/theatre/plays/play2.jpg" },
+    { title: "After Ever After, Marine Parade Theatre", role: "Role / Position", year: "YYYY", img: "/theatre/plays/play3.jpg" },
+    { title: "Around The World, Marine Parade Theatre", role: "Role / Position", year: "YYYY", img: "/theatre/plays/play4.jpg" },
+    { title: "Welcome Aboard, Marine Parade Theatre", role: "Role / Position", year: "YYYY", img: "/theatre/plays/play5.jpg" },
+  ];
+
+  const films = [
+    { title: "The Parchment, LaSalle College", role: "Dev", year: "YYYY", img: "/theatre/films/film1.jpg" },
+    { title: "Forget Me Not, Samsung", role: "Young Vicknesh", year: "YYYY", img: "/theatre/films/film2.jpg" },
+    { title: "Upside Down Ep8, Okto", role: "Raghav", year: "YYYY", img: "/theatre/films/film3.jpg" },
+    { title: "Second Best, Verite Productions", role: "Karthik Selvakumar", year: "YYYY", img: "/theatre/films/film4.jpg" },
+    { title: "30 Days, Republic Polytechnic", role: "Navin", year: "YYYY", img: "/theatre/films/film5.jpg" },
+    { title: "Narcotic Awareness Video, Big 3 Media", role: "Raghav", year: "YYYY", img: "/theatre/films/film6.jpg" },
+    { title: "VSIFC '21 Recruitment, VS Infocomm Club", role: "Raghav", year: "YYYY", img: "/theatre/films/film7.jpg" },
+  ];
+  const trinity = useMemo(
+    () => ({
+      atcl: "In Progress",
+      tracks: [
+        {
+          key: "public-speaking",
+          title: "Public Speaking",
+          accent: "flare",
+          summary: "Politics, media, communication, philo & language",
+          grades: [
+            { grade: "ATCL Diploma", result: "In Progress", pieces: [] },
+            { grade: "Grade 8", result: "Distinction", pieces: ["The Effective Use of Modern Propaganda", "The Death Sentence"] },
+            { grade: "Grade 7", result: "Distinction", pieces: ["Euthanasia"] },
+            { grade: "Grade 6", result: "Merit", pieces: ["Preparing a Curriculum Vitae", "The Yellow Ribbon Project"] },
+            { grade: "Grade 5", result: "Distinction · Top Scorer (2019)", pieces: ["Robotics and Coding"] },
+            { grade: "Grade 4", result: "Distinction", pieces: ["Persuasive Speech to Borrow a 3Doodler", "Winning a Competition in Chicago"] },
+            { grade: "Grade 3", result: "Distinction", pieces: ["Reasons to Visit Singapore"] },
+            { grade: "Grade 2", result: "Distinction", pieces: ["Planning a Festival", "Age of Ultron Movie Review"] },
+            { grade: "Initial", result: "Distinction", pieces: ["My Favourite Assault Rifle", "My Favourite Car"] },
+          ],
+        },
+        {
+          key: "speech-drama",
+          title: "Drama",
+          accent: "ember",
+          summary: "Literary techniques, acting, improv & stagecraft",
+          grades: [
+            { grade: "ATCL Diploma", result: "In Progress", pieces: [] },
+            { grade: "Grade 8", result: "Distinction", pieces: ["The Prince", "1980 GE Speech", "A Satirical Elegy on the Death of a General"] },
+            { grade: "Grade 7", result: "Distinction", pieces: ["Macbeth", "At the Theatre To the Lady Behind Me", "To The Moon"] },
+            { grade: "Grade 6", result: "Merit", pieces: ["Sonnet XIX", "Time After Time", "Army Daze"] },
+            { grade: "Grade 4", result: "Distinction", pieces: ["The Blood of Olympus", "Speech", "Alice in Wonderland"] },
+            { grade: "Grade 3", result: "Distinction", pieces: ["The New Sun", "The Creature in the Classroom", "Charlie and the Chocolate Factory"] },
+            { grade: "Grade 2", result: "Distinction", pieces: ["House of Robots", "My Personal Slave", "The Robot"] },
+            { grade: "Grade 1", result: "Distinction", pieces: ["Confronting the Dragon", "A Poison Tree", "Scout Selling Cookies"] },
+          ],
+        },
+        {
+          key: "performance-arts",
+          title: "Performance Arts Certifications",
+          accent: "gold",
+          summary: "Team level scripting, rehearsals and performing",
+          grades: [
+            { grade: "Grade 5", result: "Merit", pieces: ["Blacklisted"] },
+            { grade: "Grade 2", result: "Distinction", pieces: ["Happy Beans"] },
+            { grade: "Grade 1", result: "Merit", pieces: ["The Illustrators"] },
+            { grade: "Initial", result: "Distinction", pieces: ["The Pippins"] },
+          ],
+        },
+      ],
+    }),
+    []
+  );
+
+
+  return (
+    <div className="pageWrap">
+      {/* HERO */}
+      <header className="tkHero">
+        <div className="hero2-bg" />
+          <div className="hero2-inner">
+            <div className="hero2-top">
+              <div className="brandchip">
+                <span className="dot" />
+                <span>THE DERANGED ENGINEER</span>
+                <span className="sep">/</span>
+                <span>THEATRE ARTS</span>
+              </div>
+
+              <div className="hero2-icons">
+                <a href="https://github.com/rs1311" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
+                <a href="https://www.linkedin.com/in/raghav-sriram-8a0b23288/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+                <a href="https://youtube.com/@deranged_engineer" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
+              </div>
+            </div>
+
+            <div className="heroTitleRow">
+              <img className="pfpTitle" src="/meraghav.jpg" alt="Raghav Sriram" loading="eager" />
+              <div className="heroTitles">
+                <h1 className="hero2-title">Raghav Sriram</h1>
+                <h2 className="hero2-title2">Actor · Theatre Student</h2>
+              </div>
+            </div>
+
+            <p className="hero2-sub">
+              I love acting. I've spent the last decade of my life mastering the art, and have gained exposure from various films, plays, directors and studios.
+            </p>
+              <div className="heroQuickGrid">
+                <div className="heroQuick">
+                  <div className="tkQuickK">Productions</div>
+                  <div className="tkQuickV">{stats.total}</div>
+                  <div className="tkQuickS">{stats.plays} plays · {stats.films} films</div>
+                </div>
+
+                <div className="heroQuick">
+                  <div className="tkQuickK">Years In Field</div>
+                  <div className="tkQuickV">{stats.years}</div>
+                  <div className="tkQuickS">Acting / Performing / Studying Theatre</div>
+                </div>
+
+                <div className="heroQuick">
+                  <div className="tkQuickK">Language Exposure (Acting)</div>
+                  <div className="tkQuickV"><FaGlobeAsia /></div>
+                  <div className="tkQuickS">{stats.languages.join(" · ")}</div>
+                </div>
+              </div>
+
+            <div className="hero2-cta">
+              
+              <button className="btn2 primary" type="button" onClick={() => goToSection("/theatre-arts","identity")}>
+                Identity
+              </button>
+              <button className="btn2" type="button" onClick={() => goToSection("/theatre-arts","coursework")}>
+                Coursework
+              </button>
+              <button className="btn2" type="button" onClick={() => goToSection("/theatre-arts","plays")}>
+                Plays
+              </button>
+              <button className="btn2" type="button" onClick={() => goToSection("/theatre-arts","films")}>
+                Films
+              </button>
+            </div>
+          </div>
+      </header>
+      
+
+      {/* IDENTITY + LANGUAGES */}
+      <section className="taSection" id="identity">
+        <div className="sectionHead">
+          <span className="sig">// theatre-arts / identity</span>
+          <span className="bar" />
+        </div>
+
+        <div className="taGrid2">
+          <div className="panel2 taPanel">
+            <h3 className="taMiniHead">Performance identity</h3>
+            <p className="taBody">
+              I typically act in works with strong and fiery emotions, drawn to characters driven by intensity, conflict, and inner volatility. I aim to channel that energy with clarity to give a compelling performance.
+            </p>
+
+            <div className="taDivider" />
+
+            <h3 className="taMiniHead">Genres I've Done</h3>
+            <div className="taLangGrid">
+              {stats.genres.map((l) => (
+                <span className="taLang" key={l}>{l}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="panel2 taPanel">
+            <h3 className="taMiniHead">Disciplines</h3>
+
+            <div className="taDisciplineGrid">
+              <div className="taDiscipline">
+                <div className="taDiscImg">
+                  <img src="/theatre/upsidedown.jpg" alt="Drama" loading="lazy" />
+                </div>
+                <div className="taDiscMeta">
+                  <div className="taDiscTitle">Drama</div>
+                  <div className="taDiscResult">
+                    <FaMedal /> {stats.sdd.distinctions} Dist · {stats.sdd.merits} Merit
+                  </div>
+                </div>
+              </div>
+
+              <div className="taDiscipline">
+                <div className="taDiscImg">
+                  <img src="/theatre/pubspeakek.jpg" alt="Public Speaking" loading="lazy" />
+                </div>
+                <div className="taDiscMeta">
+                  <div className="taDiscTitle">Public Speaking</div>
+                  <div className="taDiscResult">
+                    <FaMedal /> {stats.ps.distinctions} Dist · {stats.ps.merits} Merit
+                  </div>
+                </div>
+              </div>
+
+              <div className="taDiscipline">
+                <div className="taDiscImg">
+                  <img src="/theatre/pack4.jpg" alt="Performance Arts" loading="lazy" />
+                </div>
+                <div className="taDiscMeta">
+                  <div className="taDiscTitle">Performance Arts</div>
+                  <div className="taDiscResult">
+                    <FaMedal /> {stats.pa.distinctions} Dist · {stats.pa.merits} Merit
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section className="taSection" id="coursework">
+        <div className="sectionHead">
+          <span className="sig">// theatre-arts / trinity-coursework</span>
+          <span className="bar" />
+        </div>
+
+        <div className="panel2 taPanel taLedgerTop">
+          <div className="taLedgerTitleRow">
+            <div className="taLedgerTitle">Trinity Coursework</div>
+            <div className="taLedgerChip"><FaCertificate /> ATCL Diploma: {trinity.atcl}</div>
+          </div>
+          <div className="taLedgerSub">
+            A record of assessed performance. Topics range from literature and theatre to technology, rhetoric, and persuasion.
+          </div>
+        </div>
+
+        <div className="taTrackGrid">
+          {trinity.tracks.map((t) => (
+            <div className={`taTrack ${t.accent}`} key={t.key}>
+              <div className="taTrackHead">
+                <div className="taTrackTitle">{t.title}</div>
+                <div className="taTrackHint">{t.summary}</div>
+              </div>
+
+              <div className="taGradeList">
+                {t.grades.map((g) => (
+                  <details className="taGrade" key={`${t.key}-${g.grade}`}>
+                    <summary className="taGradeSummary">
+                      <span className="taGradeLeft">
+                        <span className="taGradeTag">{g.grade}</span>
+                        <span className="taGradeResult">{g.result}</span>
+                      </span>
+                      <span className="taGradeChevron">+</span>
+                    </summary>
+
+                    {g.pieces.length > 0 ? (
+                      <div className="taPieces">
+                        {g.pieces.map((p) => (
+                          <div className="taPiece" key={p}>
+                            <span className="taPieceDot" />
+                            <span>{p}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="taPieces taMuted">No pieces listed for this entry.</div>
+                    )}
+                  </details>
+                ))}
               </div>
             </div>
           ))}
         </div>
       </section>
 
+      {/* PLAYS GALLERY */}
+      <section className="taSection" id="plays">
+        <div className="sectionHead">
+          <span className="sig">// theatre-arts / plays</span>
+          <span className="bar" />
+        </div>
 
-      {/* Education Cards */}
-      <section className="education">
-        <h2>// education</h2>
-        <div className="card-grid">
-          {[
-            {
-              title: "Victoria Junior College",
-              years: "2023–2024",
-              details: "Computing Talent Development Program",
-              subjects: "H2 Computing, H2 Physics, H2 Maths, H1 Economics, H1 General Paper"
-            },
-            {
-              title: "Victoria School",
-              years: "2019–2022",
-              details: "Integrated Program, STEM Talent Development Program",
-              subjects: "Physics, Chemistry, IP Maths, IP English, History, English Lit, Higher Tamil"
-            }
-          ].map((edu, i) => (
-            <div className="edu-card" key={i}>
-              <h3>{edu.title}</h3>
-              <span className="edu-years">{edu.years}</span>
-              <p>{edu.details}</p>
-              <p style={{ color: "grey", fontSize: "0.75rem" }}>{edu.subjects}</p>
-            </div>
+        <div className="taGalleryGrid">
+          {plays.map((p) => (
+            <article className="taWorkCard" key={p.title}>
+              <div className="taWorkThumb">
+                <img src={p.img} alt={p.title} loading="lazy" />
+                <div className="taWorkShade" />
+              </div>
+
+              <div className="taWorkMeta">
+                <div className="taWorkTitleRow">
+                  <div className="taWorkName">{p.title}</div>
+                  <div className="taWorkYear">{p.year}</div>
+                </div>
+                <div className="taWorkRole">{p.role}</div>
+              </div>
+            </article>
           ))}
         </div>
       </section>
 
-      <section className="awards">
-        <h2>// awards</h2>
-        <div className="award-wall">
-          {[
-            "Passionate Learner Award 2022",
-            "School Distinguished Service Award 2022",
-            "Intl Math Modelling Merit Award 2022",
-            "Singapore Physics League HM 2023",
-            "S’pore Junior Physics Olympiad HM 2022",
-            "Academic Improvement Award 2021",
-            "EAGLES Award (2017, 2018, 2022)",
-            "FPS Int’l Champions 2017",
-            "Passionate Learner Award 2022",
-            "FPS Int’l Vice-Champions 2018",
-            "CMPS Champions 2017",
-            "CMPS Champions 2016"
-          ].map((award, idx) => (
-            <div
-              className={`award-badge ${idx%1 === 0 ? "badge-glow" : "badge-outline"}`}
-              key={idx}
-            >
-              🏆 {award}
-            </div>
+      {/* FILMS GALLERY */}
+      <section className="taSection" id="films">
+        <div className="sectionHead">
+          <span className="sig">// theatre-arts / films</span>
+          <span className="bar" />
+        </div>
+
+        <div className="taGalleryGrid">
+          {films.map((f) => (
+            <article className="taWorkCard" key={f.title}>
+              <div className="taWorkThumb">
+                <img src={f.img} alt={f.title} loading="lazy" />
+                <div className="taWorkShade" />
+              </div>
+
+              <div className="taWorkMeta">
+                <div className="taWorkTitleRow">
+                  <div className="taWorkName">{f.title}</div>
+                  <div className="taWorkYear">{f.year}</div>
+                </div>
+                <div className="taWorkRole">{f.role}</div>
+              </div>
+            </article>
           ))}
         </div>
       </section>
-
-
-      {/* Extracurricular Cloud */}
-      <section className="extracurriculars">
-        <h2>// extracurriculars</h2>
-        <div className="tag-cloud">
-          {[
-            "VJC Cybersecurity 2023 – Founder",
-            "VS Infocomm 2021 – President",
-            "VJC Robotics 2023 – Electronics Head",
-            "VS Physics SIG 2020 – Founder",
-            "VJC Computing TDP 2023 – Cohort In Charge",
-            "VS Physics TDP 2022 – Member",
-            "VS Math TDP 2022 – Member",
-            "VS Social Innovation Board 2020 - Leader",
-            "VS InfoTech Department 2022 - Representative",
-            "VS Monitor's Council 2019 - Member",
-            "VS AI Student Group 2022 – Founding Member",
-            "People's Association - Grassroots Leader",
-            "CZ Innovation 2018 – Public Relations Officer",
-            "The LENZ Project – Software Lead",
-            "PRW Drones Tech & Law – Founding Member",
-            "CZ Shark Scouts 2017 – President"
-
-          ].map((tag, i) => (
-            <span key={i} className="tag">{tag}</span>
-          ))}
-        </div>
-      </section>
-
-      {/* Competitions & Workshops */}
-      <section className="competitions">
-        <h2>// competitions & workshops</h2>
-        <div className="highlight-board">
-          {[
-            "NUS HackNRoll 2024 – Organiser",
-            "DSTA-DSO-VJC Robo Challenge 2023 – Emcee",
-            "Ntnl Thunkable Hackathon 2020 – Organiser",
-            "VS Mock-NOI 2023 – Organiser",
-            "Decode & Conquer 2024 – Instructor",
-            "MultiLayer CyberSec 2024 – Lead",
-            "VSIFC Competitive C++ 2023 – Trainer",
-            "VSIFC Youth Outreach 2019 – Emcee",
-            "Victoria Challenge 2019 – Organiser",
-            "BuildingBloCS 2023 – HR Organiser",
-            "Project V 2023 – Emcee"
-
-          ].map((event, i) => (
-            <div className="highlight-item" key={i}>{event}</div>
-          ))}
-        </div>
-      </section>
-
-      <footer className="footer">
-        <p>Contact Me : raghav@mensa.sg</p>
-      </footer>
     </div>
   );
-};
+}
 
-export default App;
+function Taekwondo() {
+  const { goToSection } = useSectionNav();
+  const stats = useMemo(
+    () => ({
+      years: 11,
+      rank: "3rd Dan",
+      next: "2nd Dan Converted, 3rd Pending",
+      academies: 3,
+      competitions: ["Pesta Sukan 2023"],
+      eras: ["Early childhood", "Junior competition", "Adolescent refinement", "Present day"],
+    }),
+    []
+  );
+
+  // Put images/videos in:
+  // /public/taekwondo/early/
+  // /public/taekwondo/mid/
+  // /public/taekwondo/current/
+  const gallery = [
+    { era: "Early years", img: "/taekwondo/early1.jpg" },
+    { era: "Early years", img: "/taekwondo/early2.jpg" },
+
+    { era: "Developing years", img: "/taekwondo/mid1.jpg" },
+    { era: "Developing years", img: "/taekwondo/mid2.jpg" },
+
+    { era: "Present day", img: "/taekwondo/current1.jpg" },
+    { era: "Present day", img: "/taekwondo/current2.jpg" },
+  ];
+
+  const skillStack = [
+    { k: "Poomsae", v: "Strong in Taeguk Chil Jang, Poomsae Koryo,  Poomsae Pyongwon" },
+    { k: "Kyorugi", v: "Strong in Short Range Sparring + Quick Attacks + Closing Distance" },
+  ];
+
+  return (
+    <div className="pageWrap">
+      {/* HERO */}
+      <header className="tkHero">
+        <div className="hero2-bg" />
+          <div className="hero2-inner">
+            <div className="hero2-top">
+              <div className="brandchip">
+                <span className="dot" />
+                <span>THE DERANGED ENGINEER</span>
+                <span className="sep">/</span>
+                <span>TAEKWONDO</span>
+              </div>
+
+              <div className="hero2-icons">
+                <a href="https://github.com/rs1311" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
+                <a href="https://www.linkedin.com/in/raghav-sriram-8a0b23288/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+                <a href="https://youtube.com/@deranged_engineer" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
+              </div>
+            </div>
+
+            <div className="heroTitleRow">
+              <img className="pfpTitle" src="/meraghav.jpg" alt="Raghav Sriram" loading="eager" />
+              <div className="heroTitles">
+                <h1 className="hero2-title">Raghav Sriram</h1>
+                <h2 className="hero2-title2">3rd Dan · Kyorugi Fighter</h2>
+              </div>
+            </div>
+
+            <p className="hero2-sub">
+              I build at the edge of systems: low-level software, electronics, architecture, and applied security.
+              If it’s off the beaten path, I’m probably assembling it.
+            </p>
+              <div className="heroQuickGrid">
+                <div className="heroQuick">
+                  <div className="tkQuickK">Years trained</div>
+                  <div className="tkQuickV">{stats.years}</div>
+                  <div className="tkQuickS">Continuous practice</div>
+                </div>
+
+                <div className="heroQuick">
+                  <div className="tkQuickK">Current standing</div>
+                  <div className="tkQuickV">{stats.rank}</div>
+                  <div className="tkQuickS">{stats.next}</div>
+                </div>
+
+                <div className="heroQuick">
+                  <div className="tkQuickK">Academies</div>
+                  <div className="tkQuickV">{stats.academies}</div>
+                  <div className="tkQuickS">Different instructors · styles converged</div>
+                </div>
+              </div>
+
+            <div className="hero2-cta">
+              
+              <button className="btn2 primary" type="button" onClick={() => goToSection("/taekwondo","identity")}>
+                Identity
+              </button>
+              <button className="btn2" type="button" onClick={() => goToSection("/taekwondo","training")}>
+                Training
+              </button>
+            </div>
+          </div>
+      </header>
+
+      {/* IDENTITY */}
+      <section className="tkSection" id="identity">
+        <div className="sectionHead">
+          <span className="sig">// taekwondo / identity</span>
+          <span className="bar" />
+        </div>
+
+        <div className="tkGrid2">
+          <div className="panel2 tkPanel">
+            <h3 className="tkMiniHead">Training philosophy</h3>
+            <p className="tkBody">
+              I train to be better than my previous self. I strike fast and precisely, and fight in close range to gain control of a match.
+            </p>
+
+            <div className="tkDivider" />
+
+            <h3 className="tkMiniHead">Skill stack</h3>
+              <div className="tkStack">
+                {skillStack.map((s) => (
+                  <div className="tkStackRow" key={s.k}>
+                    <div className="tkStackK">{s.k}</div>
+                    <div className="tkStackV">{s.v}</div>
+                  </div>
+                ))}
+              </div>
+
+          </div>
+
+          <div className="panel2 tkPanel">
+            <h3 className="tkMiniHead">Roadmap</h3>
+
+            <div className="tkRoadmap">
+              {[
+                {
+                  org: "Hyun Taekwondo Academy",
+                  note: "2015 - 2017 (White Belt -> Red-Black Belt)",
+                },
+                {
+                  org: "Lions Taekwondo Academy",
+                  note: "2018 - 2024 (Red-Black -> Dan 2)",
+                },
+                {
+                  org: "World Champions Taekwondo Academy (Singapore)",
+                  note: "2025 - 2026 (Dan 2 -> Dan 3)",
+                },
+              ].map((s, i) => (
+                <div className="tkStep" key={s.org}>
+                  <div className="tkStepMark">
+                    <div className="tkStepNum">{String(i + 1).padStart(2, "0")}</div>
+                    <div className="tkStepLine" />
+                  </div>
+
+                  <div className="tkStepBody">
+                    <div className="tkStepTop">
+                      <div className="tkStepOrg">{s.org}</div>
+                    </div>
+                    <div className="tkStepNote">{s.note}</div>
+                  </div>
+                </div>
+              ))}
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* GALLERY */}
+      <section className="tkSection" id="training">
+        <div className="sectionHead">
+          <span className="sig">// taekwondo / training</span>
+          <span className="bar" />
+        </div>
+
+        <div className="tkGallery">
+          {gallery.map((g, i) => (
+            <article className="tkShot" key={i}>
+              <img src={g.img} alt={g.era} loading="lazy" />
+              <div className="tkShotMeta">{g.era}</div>
+            </article>
+          ))}
+        </div>
+
+        <div className="panel2 tkPanel tkNote">
+          This gallery spans multiple phases of training, documenting technical growth,
+          physical maturation, and continuity over more than a decade.
+          Videos may be added alongside stills.
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function Motorsports() {
+  const { goToSection } = useSectionNav();
+  return (
+    <div className="pageWrap">
+      {/* HERO */}
+      <header className="tkHero">
+        <div className="hero2-bg" />
+          <div className="hero2-inner">
+            <div className="hero2-top">
+              <div className="brandchip">
+                <span className="dot" />
+                <span>THE DERANGED ENGINEER</span>
+                <span className="sep">/</span>
+                <span>MOTORSPORTS</span>
+              </div>
+
+              <div className="hero2-icons">
+                <a href="https://github.com/rs1311" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
+                <a href="https://www.linkedin.com/in/raghav-sriram-8a0b23288/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+                <a href="https://youtube.com/@deranged_engineer" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
+              </div>
+            </div>
+
+            <div className="heroTitleRow">
+              <img className="pfpTitle" src="/meraghav.jpg" alt="Raghav Sriram" loading="eager" />
+              <div className="heroTitles">
+                <h1 className="hero2-title">Raghav Sriram</h1>
+                <h2 className="hero2-title2">Speed Enthusiast · Prospecting Pilot</h2>
+              </div>
+            </div>
+
+            <p className="hero2-sub">
+              I build at the edge of systems: low-level software, electronics, architecture, and applied security.
+              If it’s off the beaten path, I’m probably assembling it.
+            </p>
+              <div className="heroQuickGrid">
+                <div className="heroQuick">
+                  <div className="tkQuickK">ATV</div>
+                  <div className="tkQuickV">400cc</div>
+                  <div className="tkQuickS">India · Thailand · Indonesia · Malaysia</div>
+                </div>
+                <div className="heroQuick">
+                  <div className="tkQuickK">Karting</div>
+                  <div className="tkQuickV">50–200cc</div>
+                  <div className="tkQuickS">SG · Dubai · MY · Vietnam</div>
+                </div>
+                <div className="heroQuick">
+                  <div className="tkQuickK">Road</div>
+                  <div className="tkQuickV">150cc</div>
+                  <div className="tkQuickS">Class 2B in progress</div>
+                </div>
+              </div>
+
+            <div className="hero2-cta">
+              
+              <button className="btn2 primary" type="button" onClick={() => goToSection("/motorsports", "overview")}>
+                Overview
+              </button>
+              <button className="btn2" type="button" onClick={() => goToSection("/motorsports", "platforms")}>
+                Platforms
+              </button>
+              <button className="btn2" type="button" onClick={() => goToSection("/motorsports", "progression")}>
+                Progression
+              </button>
+              <button className="btn2" type="button" onClick={() => goToSection("/motorsports", "gallery")}>
+                Gallery
+              </button>
+            </div>
+          </div>
+      </header>
+      
+
+      {/* OVERVIEW */}
+      <section className="section2" id="overview">
+        <div className="sectionHead">
+          <span className="sig">// motorsports / overview</span>
+          <span className="bar" />
+        </div>
+
+        <div className="panel2">
+          <p className="lead">
+            I love the rush of adrenaline that comes with things that go fast. Be it motorbikes, cars, ATVs, karts, armoured fighting vehicles, simulators or planes. Here you can see all the interesting stuff I get up to in the name of adventure.
+          </p>
+        </div>
+      </section>
+
+      {/* EXPERIENCE GRID */}
+      <section className="section2" id="experience">
+        <div className="sectionHead">
+          <span className="sig">// motorsports / platforms</span>
+          <span className="bar" />
+        </div>
+
+        <div className="msGrid">
+          <div className="panel2 msPanel">
+            <h3 className="msMiniHead">All-Terrain Vehicles</h3>
+            <p className="msBody">
+              400cc ATVs across mixed terrain environments.
+              Focus on throttle modulation, body positioning, and terrain reading.
+            </p>
+            <div className="msBadges">
+              <span className="msBadge">400cc</span>
+              <span className="msBadge">Loose surfaces</span>
+              <span className="msBadge">Multi-country exposure</span>
+            </div>
+          </div>
+
+          <div className="panel2 msPanel">
+            <h3 className="msMiniHead">Kart Racing</h3>
+            <p className="msBody">
+              Indoor and outdoor karting from entry-level to higher-power platforms.
+              Emphasis on racing lines, braking consistency, and situational awareness.
+            </p>
+            <div className="msBadges">
+              <span className="msBadge">50cc</span>
+              <span className="msBadge">100cc</span>
+              <span className="msBadge">200cc</span>
+              <span className="msBadge">International tracks</span>
+            </div>
+          </div>
+
+          <div className="panel2 msPanel">
+            <h3 className="msMiniHead">Motorcycles</h3>
+            <p className="msBody">
+              Regular riding on 150cc motorcycles.
+              Developing road discipline, hazard anticipation, and mechanical sympathy.
+            </p>
+            <div className="msBadges">
+              <span className="msBadge">150cc</span>
+              <span className="msBadge">Urban riding</span>
+              <span className="msBadge">Class 2B</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROGRESSION */}
+      <section className="section2" id="progression">
+        <div className="sectionHead">
+          <span className="sig">// motorsports / progression</span>
+          <span className="bar" />
+        </div>
+
+        <div className="twoCol">
+          <div className="panel2">
+            <h3 className="miniHead">Skill development</h3>
+            <div className="msStack">
+              <div className="msStackRow">
+                <div className="msStackK">Control</div>
+                <div className="msStackV">Throttle discipline, braking smoothness, stability under speed</div>
+              </div>
+              <div className="msStackRow">
+                <div className="msStackK">Awareness</div>
+                <div className="msStackV">Track positioning, surroundings, entry/exit timing</div>
+              </div>
+              <div className="msStackRow">
+                <div className="msStackK">Mechanics</div>
+                <div className="msStackV">Grip limits, power delivery, feedback interpretation</div>
+              </div>
+              <div className="msStackRow">
+                <div className="msStackK">Composure</div>
+                <div className="msStackV">Decision-making under speed and fatigue</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="panel2">
+            <h3 className="miniHead">Aviation (early)</h3>
+            <p className="msBody">
+              I am also working toward a pilot’s license.  
+              There is nothing to show yet — and that is intentional.
+              For now, this remains a future extension of the same instinct:
+              understanding systems in motion.
+            </p>
+            <div className="msBadges">
+              <span className="msBadge">Theory first</span>
+              <span className="msBadge">No logbook yet</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* GALLERY NOTE */}
+      <section className="section2" id="gallery">
+        <div className="sectionHead">
+          <span className="sig">// motorsports / gallery</span>
+          <span className="bar" />
+        </div>
+        <div className="panel2">
+          <h3 className="miniHead">Media archive</h3>
+          <p className="msBody">
+            I have extensive photos and videos across countries, vehicles, and years.
+            This gallery will be added once curated into a coherent progression narrative.
+          </p>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+
+
+
+function Research() {
+  const { goToSection } = useSectionNav();
+
+  const focus = [
+    "Fault-tolerant quantum computation",
+    "Quantum error correction under noise",
+    "Architecture-level tradeoffs",
+    "Research communication and clarity",
+  ];
+
+  const publications = [
+    {
+      title: "Paper 01",
+      venue: "OSF Preprint",
+      year: "2025",
+      desc:
+        "Exploration of fault tolerance using quantum error correction against noisy environments, focusing on what breaks and why.",
+      img: "/research/paper1.jpg",
+      link: "https://osf.io/e67tz",
+      tags: ["Fault tolerance", "QEC", "Noise"],
+    },
+    {
+      title: "Paper 02",
+      venue: "In preparation",
+      year: "2026",
+      desc:
+        "Structured synthesis of definitions, assumptions, and practical constraints in quantum systems.",
+      img: "/research/paper2.jpg",
+      link: "#",
+      tags: ["Survey", "Architecture"],
+    },
+    {
+      title: "Paper 03",
+      venue: "In progress",
+      year: "2026",
+      desc:
+        "Simulation-driven notes on decoder behavior, failure modes, and generalizable lessons.",
+      img: "/research/paper3.jpg",
+      link: "#",
+      tags: ["Simulation", "Decoding"],
+    },
+  ];
+
+  // Knowledge map / roadmap (replace titles later if you want)
+  const map = [
+    {
+      title: "Foundations",
+      img: "/research/map1.jpg",
+      lines: [
+        "Formal definitions: noise, channels, fault tolerance",
+        "What assumptions are allowed, and which are illegal",
+        "Where intuition fails",
+      ],
+      tags: ["Definitions", "Noise models", "Scope"],
+    },
+    {
+      title: "Error Correction",
+      img: "/research/map2.jpg",
+      lines: [
+        "Code families as engineering decisions",
+        "Threshold thinking, overhead, scaling behavior",
+        "Failure modes, not marketing",
+      ],
+      tags: ["QEC", "Thresholds", "Overhead"],
+    },
+    {
+      title: "Decoding and Reality",
+      img: "/research/map3.jpg",
+      lines: [
+        "Decoder behavior under adversarial conditions",
+        "What breaks first under resource constraints",
+        "How to measure progress without lying to yourself",
+      ],
+      tags: ["Decoders", "Metrics", "Failure analysis"],
+    },
+    {
+      title: "Architecture and Systems",
+      img: "/research/map4.jpg",
+      lines: [
+        "Mapping theory onto hardware constraints",
+        "Tradeoffs across layers",
+        "What a deployable stack would require",
+      ],
+      tags: ["Architecture", "Scheduling", "Systems"],
+    },
+  ];
+
+  // Gallery (swap to real images later)
+  const gallery = [
+    { src: "/research/gallery1.jpg", label: "Annotated paper margins (working notes)" },
+    { src: "/research/gallery2.jpg", label: "Experiment snapshot: noise sweep" },
+    { src: "/research/gallery3.jpg", label: "Decoder intuition sketch" },
+    { src: "/research/gallery4.jpg", label: "System boundary diagram" },
+    { src: "/research/gallery5.jpg", label: "Draft figure: overhead tradeoffs" },
+    { src: "/research/gallery6.jpg", label: "Research timeline board" },
+  ];
+
+  return (
+    <>
+      {/* HERO */}
+      <header className="hero2">
+        <div className="hero2-bg" />
+        <div className="hero2-inner">
+          <div className="hero2-top">
+            <div className="brandchip">
+              <span className="dot" />
+              <span>FIELD LOG</span>
+              <span className="sep">/</span>
+              <span>THE DERANGED ENGINEER</span>
+            </div>
+
+            <div className="hero2-icons">
+              <a href="https://github.com/rs1311" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
+              <a href="https://www.linkedin.com/in/raghav-sriram-8a0b23288/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+              <a href="https://youtube.com/@deranged_engineer" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
+            </div>
+          </div>
+
+          <div className="heroTitleRow">
+            <img className="pfpTitle" src="/meraghav.jpg" alt="Raghav Sriram" loading="eager" />
+            <div className="heroTitles">
+              <h1 className="hero2-title">Raghav Sriram</h1>
+              <h2 className="hero2-title2">Electronic Engineer · Security Hobbyist</h2>
+            </div>
+          </div>
+
+          <p className="hero2-sub">
+            I build at the edge of systems: low-level software, electronics, architecture, and applied security.
+            If it’s off the beaten path, I’m probably assembling it.
+          </p>
+            <div className="heroQuickGrid">
+              <div className="heroQuick">
+                <div className="tkQuickK">Field</div>
+                <div className="tkQuickV">Quantum Computing</div>
+                <div className="tkQuickS">Low-level · signals · security</div>
+              </div>
+              <div className="heroQuick">
+                <div className="tkQuickK">Mode</div>
+                <div className="tkQuickV">Research + Experiments</div>
+                <div className="tkQuickS">Low-level · signals · security</div>
+              </div>
+              <div className="heroQuick">
+                <div className="tkQuickK">Output</div>
+                <div className="tkQuickV">Papers · Artifacts</div>
+                <div className="tkQuickS">Low-level · signals · security</div>
+              </div>
+            </div>
+          <div className="hero2-cta">
+            
+            <button className="btn2 primary" type="button" onClick={() => goToSection("/research", "positioning")}>
+              Positioning
+            </button>
+            <button className="btn2" type="button" onClick={() => goToSection("/research", "publications")}>
+              Publications
+            </button>
+            <button className="btn2" type="button" onClick={() => goToSection("/research", "knowledge")}>
+              Knowledge Map
+            </button>
+            <button className="btn2" type="button" onClick={() => goToSection("/research", "gallery")}>
+              Gallery
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* POSITIONING */}
+      <section className="section2" id="positioning">
+        <div className="sectionHead">
+          <span className="sig">// research-positioning</span>
+          <span className="bar" />
+        </div>
+
+        <div className="panel2">
+          <p className="lead">
+            My focus is not novelty for its own sake. I care about correctness,
+            explicit assumptions, and communicating ideas so they can be tested,
+            challenged, and built upon.
+          </p>
+
+          <div className="skillPills" style={{ marginTop: "0.8rem" }}>
+            {focus.map((f) => (
+              <span className="pill" key={f}>{f}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PUBLICATIONS */}
+      <section className="section2" id="publications">
+        <div className="sectionHead">
+          <span className="sig">// publications</span>
+          <span className="bar" />
+        </div>
+
+        <div className="projectGrid2">
+          {publications.map((p) => (
+            <article className="projectCard2" key={p.title}>
+              <div className="projectThumb">
+                <img src={p.img} alt={p.title} loading="lazy" />
+                <div className="projectShade" />
+                <div className="projectIndex">{p.year}</div>
+              </div>
+
+              <h3 className="projectTitle">{p.title}</h3>
+              <p className="projectDesc">{p.desc}</p>
+
+              {/* FIX: pills get breathing room + won't touch edges */}
+              <div
+                style={{
+                  padding: "0 1.1rem 0.8rem",
+                }}
+              >
+                <div
+                  className="skillPills"
+                  style={{
+                    gap: "0.45rem",
+                  }}
+                >
+                  {p.tags.map((t) => (
+                    <span className="pill" key={t}>{t}</span>
+                  ))}
+                </div>
+
+                <div style={{ marginTop: "0.8rem" }}>
+                  <a
+                    className="projectLink"
+                    href={p.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Open →
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* KNOWLEDGE MAP / ROADMAP */}
+      <section className="section2" id="knowledge">
+        <div className="sectionHead">
+          <span className="sig">// knowledge-map</span>
+          <span className="bar" />
+        </div>
+
+        <div className="projectGrid2">
+          {map.map((m) => (
+            <article className="projectCard2" key={m.title}>
+              <div className="projectThumb">
+                <img src={m.img} alt={m.title} loading="lazy" />
+                <div className="projectShade" />
+                <div className="projectIndex">MAP</div>
+              </div>
+
+              <h3 className="projectTitle">{m.title}</h3>
+
+              <div style={{ padding: "0 1.1rem 0.9rem" }}>
+                <ul style={{ margin: "0.6rem 0 0.9rem", paddingLeft: "1.05rem", color: "var(--muted)", fontSize: "0.9rem", lineHeight: "1.65" }}>
+                  {m.lines.map((x) => (
+                    <li key={x} style={{ margin: "0.25rem 0" }}>{x}</li>
+                  ))}
+                </ul>
+
+                <div className="skillPills" style={{ gap: "0.45rem" }}>
+                  {m.tags.map((t) => (
+                    <span className="pill" key={t}>{t}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* RESEARCH GALLERY */}
+      <section className="section2" id="gallery">
+        <div className="sectionHead">
+          <span className="sig">// research-gallery</span>
+          <span className="bar" />
+        </div>
+
+        <div className="projectGrid2">
+          {gallery.map((g) => (
+            <article className="projectCard2" key={g.src}>
+              <div className="projectThumb">
+                <img src={g.src} alt={g.label} loading="lazy" />
+                <div className="projectShade" />
+                <div className="projectIndex">IMG</div>
+              </div>
+
+              <h3 className="projectTitle" style={{ fontSize: "0.95rem" }}>
+                {g.label}
+              </h3>
+
+              <div style={{ padding: "0 1.1rem 1.1rem" }}>
+                <p className="projectDesc" style={{ margin: "0.55rem 0 0" }}>
+                  Swap filenames in <code>/public/research/</code> to your real artifacts.
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}
+
+
+
+function Gaming() {
+  const { goToSection } = useSectionNav();
+
+  const games = [
+    // === Signature / Long-term ===
+    { title: "Warframe", hours: 500, img: "/gaming/warframe.jpg", desc: "Gauss main who loves blowing stuff up with the Nataruk and stuck to the Kronen Prime." },
+    { title: "Destiny 2", hours: 100, img: "/gaming/destiny2.jpg", desc: "Warlock who just adores the game for its design and style. Big guns go BOOM." },
+    { title: "Minecraft", hours: 1000, img: "/gaming/minecraft.jpg", desc: "Redstone engineer who is horrifying at combat yet loves playing Bedwars with friends." },
+    { title: "Hades", hours: 50, img: "/gaming/hades.jpg", desc: "It's okay, let my shield talk. I love slicing through enemies and dashing around." },
+    { title: "Stardew Valley", hours: 300, img: "/gaming/stardew.jpg", desc: "Haven't maxed out yet, still grinding through Qi's shenanigans." },
+    { title: "Splitgate", hours: 100, img: "/gaming/splitgate.jpg", desc: "Honestly I just love the mechanics of the game, it makes me feel like a scientist." },
+    { title: "Cyberpunk", hours: 0, img: "/gaming/cyberpunk.jpg", desc: "TRUST ME I'm going to play this soon." },
+
+
+    // === Assassin’s Creed ===
+    { title: "Assassin’s Creed", hours: 300, img: "/gaming/ac.jpg", desc: "Across Syndicate, Revelations, II, III, Black Flag and Unity, I have loved every bit of the series." },
+    
+    // === Nintendo / Console ===
+    { title: "Luigi’s Mansion", hours: 10, img: "/gaming/luigi.jpg", desc: "Atmosphere-driven puzzle exploration." },
+    { title: "Mario Kart", hours: 300, img: "/gaming/mariokart.jpg", desc: "Reflex racing and spatial timing." },
+    { title: "Super Smash Bros", hours: 150, img: "/gaming/smash.jpg", desc: "Mechanical execution and matchup knowledge." },
+    { title: "Pokémon Violet", hours: 5, img: "/gaming/pokemon.jpg", desc: "Open-world RPG progression." },
+
+    // === Indie / Narrative ===
+    { title: "Undertale", hours: 5, img: "/gaming/undertale.jpg", desc: "Narrative subversion and player agency." },
+    { title: "Deltarune", hours: 3, img: "/gaming/deltarune.jpg", desc: "Character-driven episodic storytelling." },
+    { title: "Cult of the Lamb", hours: 50, img: "/gaming/cotl.jpg", desc: "Base building blended with combat loops." },
+    { title: "Hue", hours: 5, img: "/gaming/hue.jpg", desc: "Visual logic and minimalist puzzle design." },
+    { title: "Cuphead", hours: 5, img: "/gaming/cuphead.jpg", desc: "Pattern mastery and execution under pressure." },
+
+    // === RPG / Open World ===
+    { title: "Skyrim", hours: 5, img: "/gaming/skyrim.jpg", desc: "Incredible storyline. Really hard." },
+
+    // === Shooters / Competitive ===
+    { title: "Overwatch", hours: 10, img: "/gaming/overwatch.jpg", desc: "Tracer is fun, great game, didn't get to play much though." },
+    { title: "Valorant", hours: 100, img: "/gaming/valorant.jpg", desc: "Got peer pressured into playing. I just use Neon and dash headfirst into the enemy." },
+    { title: "Apex Legends", hours: 10, img: "/gaming/apex.jpg", desc: "I liked this game, look forward to exploring it more." },
+    { title: "Fortnite", hours: 200, img: "/gaming/fortnite.jpg", desc: "Honest to god I really disliked this game, especially the projectile travel speed." },
+    { title: "Animal Crossing", hours: 30, img: "/gaming/animal.jpg", desc: "Amazing Game." },
+    { title: "Critical Ops", hours: 200, img: "/gaming/criticalops.jpg", desc: "Mobile tactical shooter fundamentals." },
+
+    // === Strategy / Simulation ===
+    { title: "RollerCoaster Tycoon", hours: 50, img: "/gaming/rct.jpg", desc: "Systems optimization and management." },
+    { title: "Krunker", hours: 250, img: "/gaming/krunker.jpg", desc: "I used to play this so much during lockdown. Just grab an SMG and sprint around." },
+    { title: "Freefall Tournament", hours: 50, img: "/gaming/fft.jpg", desc: "Systems optimization and management." },
+
+    // === Racing ===
+    { title: "Asphalt", hours: 90, img: "/gaming/asphalt.jpg", desc: "Arcade racing progression, across 8, nitro, moto and legends" },
+
+    // === Mobile / Casual (Grouped, Non-Normie) ===
+    { title: "Clash Royale", hours: 300, img: "/gaming/cr.jpg", desc: "Tower nuke logbait player who's now insanely overlevelled due to welcome back rewards." },
+    { title: "Brawl Stars", hours: 250, img: "/gaming/brawlstars.jpg", desc: "Leon and Crow main who has surprisingly good RNG luck and loves playing knockout." },
+    { title: "Mario Party", hours: 180, img: "/gaming/marioparty.jpg", desc: "I have played various versions of this on both the Wii and 3DS" },
+    { title: "Maimai", hours: 30, img: "/gaming/maimai.jpg", desc: "Too many people around me play this so I play it. Vampire is a great song." },
+    { title: "Soul Knight", hours: 300, img: "/gaming/soulknight.jpg", desc: "Mobile roguelike mechanics." },
+    { title: "Geometry Dash", hours: 300, img: "/gaming/geometrydash.jpg", desc: "In 2019 I played every single version, and finished it apart from the demons." },
+    { title: "Plague Inc.", hours: 10, img: "/gaming/plagueinc.jpg", desc: "Simulation-based strategy." },
+    { title: "Bad Piggies", hours: 200, img: "/gaming/badpiggies.jpg", desc: "Physics-driven problem solving." },
+    { title: "Pokémon Go", hours: 50, img: "/gaming/pokemongo.jpg", desc: "Real-world exploration loop." },
+    { title: "Identity V", hours: 20, img: "/gaming/identityv.jpg", desc: "Asymmetric multiplayer design." },
+    { title: "Zombs Royale", hours: 200, img: "/gaming/zombs.jpg", desc: "Lightweight battle royale." },
+  ];
+
+
+  return (
+    <div className="pageWrap">
+      {/* Header */}
+      <header className="hero2">
+        <div className="hero2-bg" />
+        <div className="hero2-inner">
+          <div className="hero2-top">
+            <div className="brandchip">
+              <span className="dot" />
+              <span>FIELD LOG</span>
+              <span className="sep">/</span>
+              <span>THE DERANGED ENGINEER</span>
+            </div>
+
+            <div className="hero2-icons">
+              <a href="https://github.com/rs1311" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
+              <a href="https://www.linkedin.com/in/raghav-sriram-8a0b23288/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+              <a href="https://youtube.com/@deranged_engineer" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
+            </div>
+          </div>
+
+          <div className="heroTitleRow">
+            <img className="pfpTitle" src="/meraghav.jpg" alt="Raghav Sriram" loading="eager" />
+            <div className="heroTitles">
+              <h1 className="hero2-title">Raghav Sriram</h1>
+              <h2 className="hero2-title2">Hobbyist Gamer</h2>
+            </div>
+          </div>
+
+          <p className="hero2-sub">
+            In my generation, we grew up with games. The good kind, though.
+          </p>
+            <div className="heroQuickGrid">
+              <div className="heroQuick">
+                <div className="tkQuickK">Favourite Game</div>
+                <div className="tkQuickV">Warframe</div>
+                <div className="tkQuickS">Gauss Main</div>
+              </div>
+              <div className="heroQuick">
+                <div className="tkQuickK">Genres</div>
+                <div className="tkQuickV">Action · Roguelike</div>
+                <div className="tkQuickS">I have a type</div>
+              </div>
+              <div className="heroQuick">
+                <div className="tkQuickK">Platforms Used</div>
+                <div className="tkQuickV">6</div>
+                <div className="tkQuickS">PC, Switch, 3DS, Wii, GameCube, Android</div>
+              </div>
+            </div>
+
+          <div className="hero2-cta">
+            
+            
+            <button className="btn2" type="button" onClick={() => goToSection("/gaming", "gamegrid")}>
+              Gallery
+            </button>
+          </div>
+        </div>
+      </header>
+
+
+      {/* Games Grid */}
+      <section className="section2" id="gamegrid">
+        <div className="gamingGrid">
+          
+          {games.sort((a, b) => b.hours - a.hours).map((g) => (
+            <article className="gameCard" key={g.title}>
+              <div className="gameThumb">
+                <img src={g.img} alt={g.title} loading="lazy" />
+              </div>
+
+              <div className="gameBody">
+                <div className="gameTop">
+                  <h3 className="gameItemTitle">{g.title}</h3>
+                  <span className="gameHours">{g.hours}+ hrs</span>
+                </div>
+
+                <p className="gameDesc">{g.desc}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+
+function Lockpicking() {
+  const { goToSection } = useSectionNav();
+
+  const domains = [
+    {
+      title: "Physical Access",
+      subtitle: "Breaking In With Lockpicks",
+      desc:
+        "You don't need to cut locks open to break in. Also, I have learnt about how to exploit certain physical systems.",
+      bullets: [
+        "Lockpicking",
+        "RFID / NFC Cloning",
+        "Relay Attacks",
+        "Physical Access Control Bypassing",
+      ],
+      img: "/lock/log8.jpg",
+    },
+    {
+      title: "Social Engineering",
+      subtitle: "The Human Condition",
+      desc:
+        "A chain is only as strong as its weakest link. Usually, this refers to people and their hubris.",
+      bullets: [
+        "Phising Infrastructure",
+        "OSINT Collection",
+        "Talking to people I guess"
+      ],
+      img: "/lock/log1.jpg",
+    },
+    {
+      title: "Hardware Security",
+      subtitle: "Metal That Speaks",
+      desc:
+        "Hardware is a vital aspect of cybersecurity. I am learning still about how to exploit hardware.",
+      bullets: [
+        "Firmware extraction",
+        "Fault injection",
+        "Secure boot",
+        "Hardware root-of-trust analysis",
+      ],
+      img: "/lock/log2.jpg",
+    },
+    {
+      title: "Software Security",
+      subtitle: "Intangible Systems",
+      desc:
+        "There are many ways to hack software, as modern media protrays. This also means break-ins can be done from afar, even internationally.",
+      bullets: [
+        "Reverse Engineering",
+        "Webapp Pentesting",
+        "Exploit Development",
+      ],
+      img: "/lock/log3.jpg",
+    },
+  ];
+
+  const fieldLog = [
+    {
+      img: "/lock/log1.jpg",
+      caption: "Teaching Lockpicking",
+    },
+    {
+      img: "/lock/log2.jpg",
+      caption: "NFC cloning with Flipper",
+    },
+    {
+      img: "/lock/log3.jpg",
+      caption: "Cabinet Lock Picked",
+    },
+    {
+      img: "/lock/log4.jpg",
+      caption: "New Tools for the Trade",
+    },
+    {
+      img: "/lock/log5.jpg",
+      caption: "Door Lock Picked",
+    },
+    {
+      img: "/lock/log6.jpeg",
+      caption: "Packet Analysis with Wireshark",
+    },
+    {
+      img: "/lock/log7.jpg",
+      caption: "GoPro Hacking",
+    },
+    {
+      img: "/lock/log8.jpg",
+      caption: "Another Door Picked",
+    },
+  ];
+
+  return (
+    
+    <>
+      {/* HERO */}
+      
+      <header className="hero2">
+        <div className="hero2-bg" />
+        <div className="hero2-inner">
+          <div className="hero2-top">
+            <div className="brandchip">
+              <span className="dot" />
+              <span>THE DERANGED ENGINEER</span>
+              <span className="sep">/</span>
+              <span>BREAKING IN</span>
+            </div>
+
+            <div className="hero2-icons">
+              <a href="https://github.com/rs1311" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
+              <a href="https://www.linkedin.com/in/raghav-sriram-8a0b23288/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+              <a href="https://youtube.com/@deranged_engineer" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
+            </div>
+          </div>
+
+          <div className="heroTitleRow">
+            <img className="pfpTitle" src="/meraghav.jpg" alt="Raghav Sriram" loading="eager" />
+            <div className="heroTitles">
+              <h1 className="hero2-title">Raghav Sriram</h1>
+              <h2 className="hero2-title2">Hardware Security · Physical Pentesting</h2>
+            </div>
+          </div>
+
+          <p className="hero2-sub">
+            Disclaimer : I am strongly committed to personal ethics and the law. I don't just go around breaking into random stuff for malicious reasons.
+          </p>
+            <div className="heroQuickGrid">
+              <div className="heroQuick">
+                <div className="tkQuickK">Focus</div>
+                <div className="tkQuickV">Systems</div>
+                <div className="tkQuickS">Low-level · signals · security</div>
+              </div>
+
+              <div className="heroQuick">
+                <div className="tkQuickK">Current</div>
+                <div className="tkQuickV">NS + Research</div>
+                <div className="tkQuickS">Building in parallel</div>
+              </div>
+
+              <div className="heroQuick">
+                <div className="tkQuickK">Mode</div>
+                <div className="tkQuickV">Field-first</div>
+                <div className="tkQuickS">Build → break → learn</div>
+              </div>
+            </div>
+
+          <div className="hero2-cta">
+            
+            <button className="btn2 primary" type="button" onClick={() => goToSection("/lockpicking", "domains")}>
+              Domains
+            </button>
+            <button className="btn2" type="button" onClick={() => ggoToSection("/lockpicking", "log")}>
+              Field Log
+            </button>
+            <button className="btn2" type="button" onClick={() => goToSection("/lockpicking", "philosophy")}>
+              Why This Matters
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* DOMAINS */}
+      <section className="section2" id="domains">
+        <div className="sectionHead">
+          <span className="sig">// domains-of-practice</span>
+          <span className="bar" />
+        </div>
+
+        <div className="projectGrid2">
+          {domains.map((d) => (
+            <article className="projectCard2" key={d.title}>
+              <div className="projectThumb">
+                <img src={d.img} alt={d.title} />
+                <div className="projectShade" />
+              </div>
+
+              <h3 className="projectTitle">{d.title}</h3>
+              <p className="projectDesc">
+                <strong>{d.subtitle}.</strong> {d.desc}
+              </p>
+
+              <div className="skillPills" style={{ padding: "0 1.1rem 1.1rem" }}>
+                {d.bullets.map((b) => (
+                  <span className="pill" key={b}>{b}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* FIELD LOG */}
+      <section className="section2" id = "log">
+        <div className="sectionHead">
+          <span className="sig">// field-log</span>
+          <span className="bar" />
+        </div>
+
+        <div className="projectGrid2">
+          {fieldLog.map((l, i) => (
+            <figure className="projectCard2" key={i}>
+              <div className="projectThumb">
+                <img src={l.img} alt={l.caption} />
+                <div className="projectShade" />
+                <div className="projectIndex">{String(i + 1).padStart(2, "0")}</div>
+              </div>
+              <figcaption className="projectDesc">{l.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* PHILOSOPHY */}
+      <section className="section2" id="philosophy">
+        <div className="sectionHead">
+          <span className="sig">// why-this-matters</span>
+          <span className="bar" />
+        </div>
+
+        <div className="panel2">
+          <p className="lead">
+            Security is not about stopping attackers. It is about understanding systems
+            deeply enough to design them honestly.
+          </p>
+          <p className="lead">
+            This work feeds directly into my engineering, research, and teaching.
+          </p>
+        </div>
+      </section>
+    </>
+  );
+}
+
+
+
+// ...
+
+function Travel() {
+  const globeRef = useRef(null);
+  const stageRef = useRef(null);
+
+  const [size, setSize] = useState({ w: 900, h: 560 });
+
+  const places = useMemo(
+    () => [
+      { country: "Singapore", lat: 1.3521, lng: 103.8198 },
+      { country: "UAE", lat: 24.4539, lng: 54.3773 },
+      { country: "India", lat: 20.5937, lng: 78.9629 },
+      { country: "Thailand", lat: 15.87, lng: 100.9925 },
+      { country: "Indonesia", lat: -0.7893, lng: 113.9213 },
+      { country: "Malaysia", lat: 4.2105, lng: 101.9758 },
+      { country: "Vietnam", lat: 14.0583, lng: 108.2772 },
+      { country: "Estonia", lat: 58.5953, lng: 25.0136 },
+      { country: "Australia", lat: -25.2744, lng: 133.7751 },
+      { country: "Bahrain", lat: 26.0667, lng: 50.5577 },
+      { country: "Cambodia", lat: 12.5657, lng: 104.991 },
+      { country: "Denmark", lat: 56.2639, lng: 9.5018 },
+      { country: "Egypt", lat: 26.8206, lng: 30.8025 },
+      { country: "Germany", lat: 51.1657, lng: 10.4515 },
+      { country: "Greece", lat: 39.0742, lng: 21.8243 },
+      { country: "Iran", lat: 32.4279, lng: 53.688 },
+      { country: "Italy", lat: 41.8719, lng: 12.5674 },
+      { country: "Japan", lat: 36.2048, lng: 138.2529 },
+      { country: "Jordan", lat: 30.5852, lng: 36.2384 },
+      { country: "New Zealand", lat: -40.9006, lng: 174.886 },
+      { country: "Norway", lat: 60.472, lng: 8.4689 },
+      { country: "Oman", lat: 21.4735, lng: 55.9754 },
+      { country: "Qatar", lat: 25.3548, lng: 51.1839 },
+      { country: "Russia", lat: 61.524, lng: 105.3188 },
+      { country: "Sweden", lat: 60.1282, lng: 18.6435 },
+      { country: "United Kingdom", lat: 55.3781, lng: -3.436 },
+      { country: "United States", lat: 37.0902, lng: -95.7129 },
+    ],
+    []
+  );
+
+
+  const arcs = useMemo(() => {
+    const home = places[0];
+    if (!home) return [];
+    return places.slice(1).map((p) => ({
+      startLat: home.lat,
+      startLng: home.lng,
+      endLat: p.lat,
+      endLng: p.lng,
+    }));
+  }, [places]);
+
+  // Countries panel (handles 30–40+ easily)
+  const countries = useMemo(() => {
+    const map = new Map();
+    for (const p of places) {
+      const key = p.country || "Unknown";
+      map.set(key, (map.get(key) || 0) + 1);
+    }
+    return [...map.entries()]
+      .map(([country, count]) => ({ country, count }))
+      .sort((a, b) => b.count - a.count || a.country.localeCompare(b.country));
+  }, [places]);
+
+  // Size globe by container width + aspect ratio (portrait gets taller), clamp height
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+
+    const compute = () => {
+      const rect = el.getBoundingClientRect();
+      const w = Math.max(280, Math.floor(rect.width));
+
+      const vw = window.innerWidth || w;
+      const vh = window.innerHeight || 700;
+      const aspect = vw / Math.max(1, vh);
+
+      const target =
+        aspect < 0.62 ? w * 1.05 :      // portrait: taller
+        aspect < 0.9  ? w * 0.82 :      // mid
+                        w * 0.62;       // desktop: shorter
+
+      const h = Math.floor(Math.max(280, Math.min(620, target)));
+      setSize({ w, h });
+    };
+
+    compute();
+    const ro = new ResizeObserver(compute);
+    ro.observe(el);
+    window.addEventListener("resize", compute);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", compute);
+    };
+  }, []);
+
+  // Camera + rotation, adjusted for portrait
+  useEffect(() => {
+    if (!globeRef.current) return;
+
+    const setView = () => {
+      const isPortrait =
+        window.matchMedia?.("(orientation: portrait)")?.matches ||
+        window.innerHeight > window.innerWidth;
+
+      globeRef.current.pointOfView(
+        { lat: 10, lng: 80, altitude: isPortrait ? 3.0 : 2.1 },
+        800
+      );
+
+      const c = globeRef.current.controls();
+      c.autoRotate = true;
+      c.autoRotateSpeed = 0.55;
+    };
+
+    setView();
+    window.addEventListener("resize", setView);
+    return () => window.removeEventListener("resize", setView);
+  }, []);
+
+  return (
+    <div className="pageWrap">
+      <header className="hero2">
+        <div className="hero2-bg" />
+        <div className="hero2-inner">
+          <div className="brandchip">
+            <span className="dot" />
+            <span>FIELD LOG</span>
+            <span className="sep">/</span>
+            <span>TRAVEL</span>
+          </div>
+
+          <div className="heroTitleRow">
+            <img className="pfpTitle" src="/meraghav.jpg" alt="Raghav Sriram" loading="eager" />
+            <div className="heroTitles">
+              <h1 className="hero2-title">Raghav Sriram</h1>
+              <h2 className="hero2-title2">Serial Travel Lover</h2>
+            </div>
+          </div>
+
+          <p className="hero2-sub">The world is literally an open-world game with days, even years of playtime.</p>
+
+          <div className="heroQuickGrid">
+            <div className="heroQuick">
+              <div className="tkQuickK">Travel Style</div>
+              <div className="tkQuickV">Explorer</div>
+              <div className="tkQuickS">The Leaning Tower of Pisa is a just a tower</div>
+            </div>
+            <div className="heroQuick">
+              <div className="tkQuickK">Countries</div>
+              <div className="tkQuickV">{countries.length}</div>
+              <div className="tkQuickS">Distinct Countries / Territories</div>
+            </div>
+            <div className="heroQuick">
+              <div className="tkQuickK">I made a</div>
+              <div className="tkQuickV">3D Globe</div>
+              <div className="tkQuickS">With Awesome Pins and Animations</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section className="section2" id="globe">
+        <div className="sectionHead">
+          <span className="sig">// travel / globe</span>
+          <span className="bar" />
+        </div>
+
+        <div className="travelGlobeWrap">
+          <div className="travelGlobeStage" ref={stageRef}>
+            <Globe
+              ref={globeRef}
+              width={size.w}
+              height={size.h}
+              backgroundColor="rgba(0,0,0,0)"
+              globeImageUrl="https://unpkg.com/three-globe/example/img/earth-night.jpg"
+              bumpImageUrl="https://unpkg.com/three-globe/example/img/earth-topology.png"
+              pointsData={places}
+              pointLat={(d) => d.lat}
+              pointLng={(d) => d.lng}
+              pointAltitude={0.015}
+              pointRadius={size.w < 420 ? 0.22 : 0.34}
+              pointLabel={(d) => `${d.name}, ${d.country}`}
+              arcsData={arcs}
+              arcColor={() => ["rgba(255,43,43,0.75)", "rgba(255,122,24,0.45)"]}
+              arcAltitude={0.22}
+              arcStroke={size.w < 420 ? 0.65 : 0.9}
+              arcDashLength={0.45}
+              arcDashGap={2.2}
+              arcDashAnimateTime={1200}
+            />
+          </div>
+
+          <aside className="travelCountriesPanel panel2">
+            <div className="travelCountriesHead">
+              <div className="miniHead">Countries</div>
+              <div className="travelCountriesMeta">{countries.length}</div>
+            </div>
+
+            <div className="travelCountriesList">
+              {countries.map((c) => (
+                <div className="travelCountryRow" key={c.country}>
+                  <span className="travelCountryDot" />
+                  <span className="travelCountryName">{c.country}</span>
+                  <span className="travelCountryCount">{c.count}</span>
+                </div>
+              ))}
+            </div>
+          </aside>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+
+
+
+/* ---------------- App Shell + Icon Menu ---------------- */
+
+function IconMenu() {
+  const items = [
+    { to: "/", label: "Home", icon: <FaRobot /> },
+    { to: "/theatre-arts", label: "Theatre Arts", icon: <FaTheaterMasks /> },
+    { to: "/taekwondo", label: "Taekwondo", icon: <FaFistRaised /> },
+    { to: "/motorsports", label: "Motorsports", icon: <FaFlagCheckered /> },
+    { to: "/lockpicking", label: "Lockpicking", icon: <FaLockOpen /> },
+    { to: "/research", label: "Research Work", icon: <FaPenNib /> },
+    { to: "/travel", label: "Travel", icon: <FaGlobe /> },
+    { to: "/gaming", label: "Gaming", icon: <FaGamepad /> },
+  ];
+
+  return (
+    <nav className="iconDock" aria-label="Site navigation">
+      {items.map((it) => (
+        <NavLink
+          key={it.to}
+          to={it.to}
+          className={({ isActive }) => `dockItem ${isActive ? "active" : ""}`}
+          title={it.label}
+          aria-label={it.label}
+        >
+          <span className="dockIcon">{it.icon}</span>
+          <span className="dockLabel">{it.label}</span>
+        </NavLink>
+      ))}
+    </nav>
+  );
+}
+
+export default function App() {
+  return (
+    <div className="app">
+      <IconMenu />
+      <ScrollToTop />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/theatre-arts" element={<TheatreArts />} />
+        <Route path="/taekwondo" element={<Taekwondo />} />
+        <Route path="/motorsports" element={<Motorsports />} />
+        <Route path="/research" element={<Research />} />
+        <Route path="/gaming" element={<Gaming />} />
+        <Route path="/lockpicking" element={<Lockpicking />} />
+        <Route path="/travel" element={<Travel />} />
+      </Routes>
+    </div>
+  );
+}

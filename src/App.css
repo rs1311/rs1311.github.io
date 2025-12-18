@@ -3302,3 +3302,30 @@ button.btn2{
     transform: translateX(-50%) scale(0.82);
   }
 }
+
+/* Always keep dock within the usable iOS viewport */
+.iconDock{
+  box-sizing: border-box;
+  max-width: calc(
+    100vw
+    - 16px
+    - env(safe-area-inset-left)
+    - env(safe-area-inset-right)
+  );
+
+  padding-left:  calc(12px + env(safe-area-inset-left));
+  padding-right: calc(12px + env(safe-area-inset-right));
+}
+
+/* iPhone widths (390/393 etc): shrink just a touch more + tighten gap */
+@media (max-width: 420px){
+  .iconDock{
+    transform: translateX(-50%) scale(0.84);
+    transform-origin: center bottom;
+    gap: 8px; /* or 6px if needed */
+  }
+}
+
+.iconDock{
+  max-width: calc(100vw - 28px - env(safe-area-inset-left) - env(safe-area-inset-right));
+}

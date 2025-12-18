@@ -972,8 +972,7 @@ function Taekwondo() {
             </div>
 
             <p className="hero2-sub">
-              I build at the edge of systems: low-level software, electronics, architecture, and applied security.
-              If it’s off the beaten path, I’m probably assembling it.
+              Taekwondo has become such a core part of my identity because of the virtues and friends I gained in my journey.
             </p>
               <div className="heroQuickGrid">
                 <div className="heroQuick">
@@ -1132,8 +1131,7 @@ function Motorsports() {
             </div>
 
             <p className="hero2-sub">
-              I build at the edge of systems: low-level software, electronics, architecture, and applied security.
-              If it’s off the beaten path, I’m probably assembling it.
+              I love things that move, especially if they move fast or if they are accompanied by a rush of adrenaline. It makes me feel alive.
             </p>
               <div className="heroQuickGrid">
                 <div className="heroQuick">
